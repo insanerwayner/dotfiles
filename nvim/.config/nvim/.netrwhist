@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/wayne/.config/sxhkd'
+let g:netrw_dirhist_4='/home/wayne/projects/st'
+let g:netrw_dirhist_3='/home/wayne/.config/sxhkd'
+let g:netrw_dirhist_2='/home/wayne/.config/mpd'
+let g:netrw_dirhist_1='00:19:15:67:05:1B'
+let g:netrw_dirhist_0='/home/wayne/Projects/st'
+let g:netrw_dirhist_9='/home/wayne/.newsboat'
+let g:netrw_dirhist_8='/home/wayne/dotfiles/bash'
+let g:netrw_dirhist_7='/home/wayne/dotfiles/dosbox/.dosbox'
+let g:netrw_dirhist_6='/home/wayne/dotfiles/dosbox'

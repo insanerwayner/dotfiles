@@ -1,0 +1,12 @@
+[submodule "bash"]
+	path = bash
+	url = ./bash
+[submodule "task"]
+	path = task
+	url = ./task
+[submodule "tmuxwork"]
+	path = tmuxwork
+	url = ./tmuxwork/
+[submodule "ledger"]
+	path = ledger
+	url = ./ledger
