@@ -43,7 +43,8 @@ auto_view text/calendar application/ics
 macro attach "I" "<pipe-entry>~/bin/add_to_calcurse<enter><exit>" 
 set forward_format = "FW: %s"                                   # format of subject when forwarding
 set date_format="%m/%d/%y %I:%M%p"                              # date format
-set index_format="%2C %zs %?X?A& ? %D %-20.20F %s %* \ %4c"    # index format
+#set index_format="%2C %zs %?X?A& ? %D %-20.20F %s %* \ %4c"    # index format
+set index_format="%2C %zt%zs %?X?A& ? %D %-20.20F %s %* \ %4c"    # index format
 #set index_format="%2C %zs %?X?A& ? %D %-20.20F %-60.60s %> %4c"    # index format
 #set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s" # index format
 set pager_format="-%Z- %C/%m: %-20.20n   %s%*  -- (%P)"

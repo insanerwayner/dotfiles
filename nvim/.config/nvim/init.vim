@@ -91,6 +91,8 @@ Plug 'vimwiki/vimwiki'
 Plug 'vim-syntastic/syntastic'
 Plug 'ap/vim-css-color'
 Plug 'glacambre/firenvim'
+Plug 'tools-life/taskwiki'
+Plug 'blindFS/vim-taskwarrior'
 call plug#end()
 
 " syntastic
