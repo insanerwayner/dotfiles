@@ -1,0 +1,32 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+right_format = "$time"
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[❯](bold #ffaf00)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[❯](bold 202)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+#vicmd_symbol = "[Vi](bold 155)"
+vicmd_symbol = "[❮](bold 155)"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[directory]
+format = "[$path ](bold #ffd700)"
+
+[time]
+disabled = false
+use_12hr = true
+
+[localip]
+disabled = true
+
+#[env_var.SSH_CONNECTION]
+#variable = "SSH_CONNECTION"
+
+
+[sudo]
+disabled = true
+symbol = "🧙 "
