@@ -1,0 +1,42 @@
+[user]
+	email = darthwayne@hotmail.com
+	name = Wayne Reeves
+
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+
+[alias]
+    slog = log --pretty=format:'%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(white)%<(80,trunc)%s' --date=format:'%F %H:%M' 
+
+[pull]
+	rebase = false
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[include]
+    path = ~/.config/delta/themes/themes.gitconfig
+
+[delta]
+    #features = collared-trogon
+    #features = coracias-caudatus
+    #features = hoopoe
+    #features = tangara-chilensis
+    #features = villsau
+    features = woolly-mammoth
+    #features = calochortus-lyallii
+    #features = mantis-shrimp
+    #features = mantis-shrimp-lite
+    #features = zebra-dark
+    #features = zebra-light
+    navigate = true
+
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
