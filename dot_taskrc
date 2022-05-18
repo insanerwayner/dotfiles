@@ -1,0 +1,131 @@
+# [Created by task 2.5.1 4/16/2018 11:03:34]
+# Taskwarrior program configuration file.
+# For more documentation, see http://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
+
+# Here is an example of entries that use the default, override and blank values
+#   variable=foo   -- By specifying a value, this overrides the default
+#   variable=      -- By specifying no value, this means no default
+#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
+
+# Use the command 'task show' to see all defaults and overrides
+
+#default.command=next                                    # Default Command
+recurrence=1
+defaultwidth=150                                        # Default Width
+nag=                                                    # No Nagging
+displayweeknumber=no                                    # No Week Numbers in Calendar
+include ~/.task/wayne.holidays			        # Holidays
+calendar.holidays=full
+data.location=~/.task                                   # Files
+#dateformat=m/d/y                                       # Date Format
+bulk=5                                                  # Min amount of Tasks to start asking for Confirmation
+verbose=blank,label,new-id,edit,affected,project        # hush!b
+include ~/.task/wayne.theme				# Color theme
+#include /usr/share/task/dark-16.theme
+allow.empty.filter=no
+undo.style=side
+# Aliases
+# Urgency
+urgency.user.tag.movies.coefficient=-5
+# Contexts
+context.me.read=-test and -school or (+school due.before=tomorrow)
+context.home.read=+home
+context.school.read=+school
+context.school.write=+school
+context.freelance.read=+freelance or +fourfeathers
+context.freelance.write=+freelance or +fourfeathers
+context.test.read=+test
+context.test.write=+test
+
+# Date Format
+#dateformat=m/d/y
+
+# Project Status Report
+report.projectstatus.description=Project Status
+report.projectstatus.columns=project,uuid.short,id,description.desc,depends,entry,due,status,end
+report.projectstatus.labels=Project,UUID,ID,Description,Depends,Entered,Due,Status,Completed
+report.projectstatus.sort=status+,end+,due+,urgency-
+report.projectstatus.filter=-DELETED
+
+# Next Report
+report.next.columns=id,depends,priority,project,tags,recur,scheduled.countdown,due.relative,description.count,urgency.integer
+report.next.labels=ID,Deps,P,Project,Tag,Recur,S,Due,Description,Urg
+report.next.sort=due+,urgency-
+
+# Items in next 7 days Report
+report.7days.description=tasks due in next 7 days
+report.7days.columns=due,id,description.count
+report.7days.dateformat=a 
+report.7days.sort=due+/,urgency-
+report.7days.filter=due.after:yesterday due.by:today+6days (+PENDING or +WAITING) -PARENT -DELETED
+
+
+# Today's Completed Tasks
+report.donetoday.description=Today's completed tasks
+report.donetoday.columns=uuid.short,entry,due,description.count,project
+report.donetoday.labels=UUID,Entered,Was Due,Description,Project
+report.donetoday.sort=end+,project+/
+report.donetoday.filter=status:completed end:today
+
+# Due Today or Overdue
+report.today.description=tasks due today or overdue
+report.today.columns=id,depends,priority,project,tags,recur,scheduled.countdown,due.relative,description.count,urgency.integer
+report.today.labels=ID,Deps,P,Project,Tag,Recur,S,Due,Description,Urg
+report.today.sort=due+,urgency-
+report.today.filter=status:pending (due:today or +OVERDUE)
+
+# No Due Date
+report.nodue.description=tasks with no due dates
+report.nodue.columns=id,depends,priority,project,tags,recur,scheduled.countdown,due.relative,description.count,urgency.integer
+report.nodue.labels=ID,Deps,P,Project,Tag,Recur,S,Due,Description,Urg
+report.nodue.sort=due+,urgency-
+report.nodue.filter=status:pending due.none:
+
+# No Due Date
+report.someday.description=Tasks waiting for someday
+report.someday.columns=id,depends,priority,project,tags,recur,scheduled.countdown,due.relative,description.count,urgency.integer
+report.someday.labels=ID,Deps,P,Project,Tag,Recur,S,Due,Description,Urg
+report.someday.sort=due+,urgency-
+report.someday.filter=+WAITING due.none:
+
+# With Due Date
+report.hasduedate.description=tasks with due dates
+report.hasduedate.columns=id,depends,priority,project,tags,recur,scheduled.countdown,due.relative,description.count,urgency.integer
+report.hasduedate.labels=ID,Deps,P,Project,Tag,Recur,S,Due,Description,Urg
+report.hasduedate.sort=due+,urgency-
+report.hasduedate.filter=status:pending due.after=yesterday
+
+# Weight Report
+report.weight.decription=my weight log
+report.weight.columns=end,weight
+report.weight.labels=Date,Weight
+report.weight.sort=end-
+report.weight.filter=description=weigh yourself -PARENT -PENDING weight limit:page
+
+# Completed Weedkays
+report.donethisweek.description=tasks completed
+report.donethisweek.columns=end.formatted,description.count,end.iso
+#report.donethisweek.dateformat=a
+report.donethisweek.sort=end+
+report.donethisweek.filter=end.before:today end.after:-7d +COMPLETED -PARENT -DELETED
+
+uda.weight.type=numeric
+uda.weight.label=Weight
+
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+
+## Added By TaskWarrior
+uda.priority.values=H,M,,L
+
+color=on
+rule.color.merge=no
+news.version=2.6.0
+context.xmas.read=+christmas
+context.xmas.write=+christmas
+context=me

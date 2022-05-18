@@ -1,0 +1,2 @@
+export BROWSER=brave-browser
+export GPG_TTY=$(tty)
