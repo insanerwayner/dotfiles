@@ -1,0 +1,23 @@
+colors:
+  body: none
+  date: yellow
+  tags: cyan
+  title: blue
+default_hour: 9
+default_minute: 0
+editor: vim
+encrypt: false
+highlight: true
+indent_character: '|'
+journals:
+  default:
+    encrypt: true
+    journal: /home/wayne/Documents/jrnl/jrnl.txt
+  prayer:
+    encrypt: true
+    journal: /home/wayne/Documents/jrnl/prayer.txt
+linewrap: 79
+tagsymbols: '@,^'
+template: false
+timeformat: '%Y-%m-%d %I:%M%p'
+version: v2.5
