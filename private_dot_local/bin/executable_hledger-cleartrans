@@ -1,0 +1,100 @@
+#!/bin/bash
+declare -a amounts
+if [ -z "$1" ] && [ -z "$2" ]
+then
+    read -rp "Checking Balance: " bankbal
+    read -rp "Savings Balance: " savbal
+    printf "\n"
+elif [ -z "$2" ]
+then
+    bankbal=$1
+    read -rp "Savings Balance: " savbal
+    printf "\n"
+else
+    bankbal=$1
+    savbal=$2
+fi
+# Colors
+green=$(tput setaf 2)
+#blue=$(tput setaf 4)
+red=$(tput setaf 1)
+yellow=$(tput setaf 3)
+normal=$(tput sgr0)
+ledgbal=$(hledger bal checking -RC --format "%(total)" | tail -n1 | sed 's/ USD//g')
+sledgbal=$(hledger bal Assets:BofTX:Savings -RC --format "%(total)" | tail -n1 | sed 's/ USD//g')
+sdiff=$(bc -l <<< "$savbal-$sledgbal")
+if [ "$sdiff" != 0 ]
+then
+    if [ "$(bc -l <<< "scale=0;$sdiff % 0.25")" == 0 ]
+    then
+        printf "%s\n" "${yellow}Possible quicksave entries missing in the amount of $sdiff USD.${normal}" "Proceeding with this assumption.${normal}" 
+        printf "\n"
+        bankbal=$(bc -l <<< "$bankbal+$sdiff")
+    else
+        printf "%s\n" "${red}Savings balance is off with the amout of $sdiff USD${normal}" 
+        exit
+    fi
+fi
+total=$(bc -l <<< "$ledgbal-$bankbal")
+[ "$total" == 0 ] && printf "%s\n" "${green}Balance is Reconciled" && exit
+(( $( bc -l <<< "$total < 0") )) && echo "Enter bank balance" && exit
+printf  "Total Diff: %s USD \n\n" "$total"
+export total
+IFS=$'\n'; for amount in $(hledger print checking -P | hledger -f - reg -P not:checking amt:"<=0$total" -O csv -e tomorrow | awk -F, '{gsub(/ USD/, ""); if (NR!=1) {print $2","$4","$5","$(NF-1)}}')
+do
+    amounts+=("$amount")
+done
+unset IFS
+export trans_count=${#amounts[@]}
+until [ ${#ones} -eq "$trans_count" ];do ones+="1"; done
+function get_pattern()
+    {
+    declare -a amounts
+    for i in "$@"
+    do
+        if [ "$count" ]
+        then
+            amounts+=("$i")
+        fi
+        count=1
+    done
+    binary=$( bc <<< "obase=2;$1")
+    if [ "$trans_count" -ne ${#binary} ]
+    then
+        until [ ${#zeros} -eq $((trans_count-${#binary})) ];do zeros+="0";done
+        form_binary="$zeros""$binary"
+    else
+        form_binary="$binary"
+    fi   
+    for ((n=0; n<trans_count; n++ ))
+    do
+        if (( "${form_binary:n:1}" ))
+        then
+            trans="${amounts[$n]}"
+            prices+=("$(cut -d, -f 4 <<<"$trans")")
+            dates+=("$(cut -d, -f 1 <<<"$trans")")
+            descriptions+=("$(cut -d, -f 2 <<<"$trans")")
+            accounts+=("$(cut -d, -f 3 <<<"$trans")")
+        fi
+    done
+    sum_formula=$(IFS=+; echo "${prices[*]}")
+    sum=$(bc -l <<< "$sum_formula" )
+    unset IFS
+    if [ "$sum" == "$total" ] 
+    then
+        echo "Possibly Cleared:"
+        echo "-----------------"
+        for tran in $(seq 0 $(("${#prices[@]}"-1)))
+        do
+            hledger reg -P "${accounts[$tran]}" amt:"${prices[$tran]}" desc:"${descriptions[$tran]}" -p "${dates[$tran]}"
+        done
+        echo ""
+    fi
+    }
+export -f get_pattern
+if [ "$ones" ]
+then
+    seq "$((2#$ones))" | parallel get_pattern {} "${amounts[*]}" 
+else
+    printf "%s\n" "${red}No matching transactions"
+fi

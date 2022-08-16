@@ -1,0 +1,47 @@
+#!/bin/sh
+case "${1#[-+]}" in
+    "" ) depth=0
+        ;;
+
+    "test" )
+        #seq -f "2022-04-%g" 1 30 | xargs -I {} zsh -c 'echo "current date: {}"; printf "payday: "; faketime {} hledger-payday' | less
+        for i in $(seq 0 30)
+        do
+            date=$(date -d "+$i days" +%F)
+            echo "date: $date payday: $(faketime $date hledger-payday)"
+        done
+        exit
+        ;;
+
+    *[!0-9]*  )
+        echo "\"$1\" is not a valid integer" 1>&2
+        exit 1
+        ;;
+
+    * ) depth=$1
+        ;;
+esac
+
+parity=$(($(date +%-W) %2))
+day=$(date +%u)
+
+if [ "$parity" -eq 1 ]
+then
+    if [ "$day" -ge 5  ]
+    then
+        payday=$(date -d "next Friday + 1 week" +%F)
+    else
+        payday=$(date -d "Friday" +%F)
+    fi
+else
+    daysahead=$((-day+12))
+    payday=$(date -d "+ $daysahead days" +%F)
+fi
+
+if [ "$depth" != 0 ]
+then
+    depth=$((depth*2))
+    payday=$(date -d "$payday +$depth weeks" +%F)
+fi
+
+echo "$payday"

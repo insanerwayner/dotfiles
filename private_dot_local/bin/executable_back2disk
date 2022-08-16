@@ -1,0 +1,8 @@
+#!/bin/bash
+if mountpoint -q /mnt/backup> /dev/null
+then
+   /usr/bin/nice -n 19 /usr/bin/ionice -c2 -n7 /usr/bin/backintime backup-job >/dev/null
+else
+    task +computer add turn on backup drive due:today until:tomorrow
+fi
+

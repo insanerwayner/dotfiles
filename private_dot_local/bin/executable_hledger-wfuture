@@ -1,0 +1,11 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+    read -rp "Predicted loss per week:" amt
+else
+    amt="$1"
+fi
+forecast="
+~ every Friday  Weekly Weight
+    (Assets:Weight)     -$amt LB
+"
+echo "$forecast" | hledger -f - -f ~/ledger/weight.ledger print assets -V --forecast="from tomorrow" | ledger -f - reg -H --tail 26

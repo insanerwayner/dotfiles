@@ -1,0 +1,12 @@
+#!/bin/bash
+days=$1
+[[ $(calcurse -Q --filter-type=cal --filter-pattern='(Paid Holiday|PTO)') ]] && exit
+if [[ -n $(calcurse -Q -d "$days" --filter-type=cal) ]]
+then
+    callist=$(calcurse -Q -d "$days" --filter-type=cal --format-apt=' - [%(start:%l:%M%p) ] %m\n' --format-recur-apt=' * [%(start:%l:%M%p) ] %m\n' --format-event=' - %m\n' --format-recur-event=' * %m\n'|
+	while IFS= read -r l; do
+	    # Check for date line
+            [[ $l =~ ([0-9]+/[0-9]+/[0-9]+): ]] && ( echo "$(~/bin/dateh -d "${BASH_REMATCH[1]}" "+@{D}"):" | sed 's/next\ //' | awk 'BEGIN{OFS=FS=""}{$1=toupper($1);print}') || echo "$l"
+        done)
+   echo "$callist" | /home/wayne/bin/txtme 
+fi

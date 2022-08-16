@@ -1,0 +1,5 @@
+#!/bin/bash
+task -PARENT -WAITING +PENDING \(+OVERDUE or +DUETODAY\) _ids |
+	xargs -I % task _get %.description |
+            #sort --unique | 
+                ~/bin/txtme

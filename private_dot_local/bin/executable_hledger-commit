@@ -1,0 +1,9 @@
+#!/bin/bash
+cd /home/wayne/ledger &&
+changes=$(/usr/bin/git ls-files -mo)
+if [ "$changes" ]
+then
+    git add .
+    git commit -am "$(date) frm cronjob"
+fi
+

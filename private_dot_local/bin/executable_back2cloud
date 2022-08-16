@@ -1,0 +1,16 @@
+#!/bin/bash
+# Backup Cron
+crontab -l > ~/Nextcloud/.backup/crontab.bak
+# Export Calcurse
+calcurse -x > ~/Nextcloud/.backup/calcurse.ical
+# Backup calcurse, taskwarrior, & jrnl
+cd ~/Nextcloud/.backup/calcurse && tar -czf "calcurse-backup-$(date +'%Y%m%d%H%M%S')".tar.gz -C ~/.calcurse .
+cd ~/Nextcloud/.backup/task && tar -czf "task-backup-$(date +'%Y%m%d%H%M%S').tar.gz" -C ~/.task .
+cd ~/Nextcloud/.backup/jrnl && tar -czf "jrnl-backup-$(date +'%Y%m%d%H%M%S').tar.gz" -C ~/Documents/jrnl .
+cd ~/Nextcloud/.backup/ledger && tar -czf "ledger-backup-$(date +'%Y%m%d%H%M%S').tar.gz" -C ~/ledger .
+# Remove taskwarrior & jrnl backups older than 14 days
+find ~/Nextcloud/.backup/task -maxdepth 1 -type f -mtime +14 -exec rm {} \;
+find ~/Nextcloud/.backup/jrnl -maxdepth 1 -type f -mtime +14 -exec rm {} \;
+find ~/Nextcloud/.backup/calcurse -maxdepth 1 -type f -mtime +14 -exec rm {} \;
+find ~/Nextcloud/.backup/ledger -maxdepth 1 -type f -mtime +14 -exec rm {} \;
+

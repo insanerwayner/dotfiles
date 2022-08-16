@@ -1,0 +1,13 @@
+#!/bin/bash
+# Num Lock Always On Without Light
+setxkbmap -option numpad:mac us
+xinput --set-prop 'pointer:Unicomp Inc Unicomp 10x Kbrd R7_2_w_PS_R7_38' 'libinput Accel Speed' 1 &
+xinput --set-prop 'pointer:Unicomp Inc Unicomp 10x Kbrd R7_2_w_PS_R7_38' 'libinput Button Scrolling Button' 3 &
+xinput --set-prop 'pointer:Unicomp Inc Unicomp 10x Kbrd R7_2_w_PS_R7_38' 'libinput Scroll Method Enabled' 0 0 1 &
+xinput --set-prop 'pointer:Unicomp Inc Unicomp 10x Kbrd R7_2_w_PS_R7_38' 'libinput Button Scrolling Button Lock Enabled' 0 &
+xinput --set-prop 'pointer:Unicomp Inc Unicomp 10x Kbrd R7_2_w_PS_R7_38' 'libinput Middle Emulation Enabled' 1 &
+case "$DESKTOP_SESSION" in
+    "" | "dwm" | "awesome" ) xmodmap .config/xmodmap ;&
+    "dwm" ) sxhkd -m 1 & ;;
+esac
+

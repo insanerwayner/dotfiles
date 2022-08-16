@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "register to bank"
+hledger reg checking not:tag:modified --real -p "2022-01-01.." -R -Ocsv | awk -F"," 'NR>1 {print $6}' | tee | xargs -I % bash -c 'if [[ "$(hledger -f ~/ledger/checking.csv --rules-file=$HOME/ledger/checking.csv.rules reg checking amt:% -p 2022-01-01..)" ]]; then echo ""; else echo no %; fi' | grep no
+echo "bank to register"
+hledger -f ~/ledger/checking.csv --rules-file="$HOME"/ledger/checking.csv.rules reg checking -Ocsv -p 2022-01-01.. | awk -F"," 'NR>1 {print $6}' | tee | xargs -I % bash -c 'if [[ "$(hledger reg checking not:tag:modified --real amt:% -p 2022-01-01..)" ]]; then echo ""; else echo no %; fi' | grep no
+

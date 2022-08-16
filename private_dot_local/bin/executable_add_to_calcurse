@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Import text/calendar files from mutt
+# to calcurse.
+#
+PIDFILE="$HOME"/.calcurse/.calcurse.pid
+PID=$(cat $PIDFILE)
+# Make sure calcurse is running
+if [ ! -f "$PIDFILE" ]; then
+	exit 1
+fi
+
+# Extract the attachments
+#TEMPDIR=$(mktemp -d add-to-calcurse.XXXXXXXX)
+#cat "$@" > /tmp/tmp.ics  #| uudeview -i -m -n -q -p $TEMPDIR - > /dev/null 2>&1
+# Remove Alarm Flag
+cat "$@" | sed '/^BEGIN:VALARM/,/^END:VALARM/d' > '/tmp/tmp.ics'
+
+# Add the calendar file (last attachment) to calcurse
+#FILE=$(ls $TEMPDIR | sort -r | head -1)
+calcurse -i /tmp/tmp.ics #"$TEMPDIR/$FILE" > /dev/null 2>&1
+
+# Remove the temporary dir and trigger a reload in calcurse
+rm -rf /tmp/tmp.ics #$TEMPDIR > /dev/null 2>&1
+kill -USR1 "$PID" > /dev/null 2>&1

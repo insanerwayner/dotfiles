@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ "$1" ]
+then
+    input="$1"
+else
+    input=$(</dev/stdin)
+fi
+phone=$(cat ~/.addresses/.myphone)
+if [ "$input" != '' ]
+then
+    echo "$input" | neomutt -s "" "$phone" -F ~/.config/mutt/accounts/2-outlook.muttrc
+else
+    echo "no input specified"
+fi
