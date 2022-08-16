@@ -67,7 +67,7 @@ eval "$(starship init zsh)"
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 {{- end }}
-{{- if eq .chezmoi.osjelease.id "debian" or "ubuntu" or "fedora"  -}}
+{{- if eq .chezmoi.osrelease.id "debian" or "ubuntu" or "fedora"  -}}
 source /usr/share/zsh/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/zsh-syntax-highlighting.zsh 2>/dev/null
 {{- end }}
