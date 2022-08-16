@@ -15,6 +15,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+export HISTSIZE=10000000
+export SAVEHIST=10000000
 export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
 
-LEDGER_FILE="$HOME/ledger/master.ledger"
+export LEDGER_FILE="$HOME/ledger/master.ledger"
