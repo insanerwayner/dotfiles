@@ -2,4 +2,5 @@
 .config/mutt
 .config/msmtp
 .config/notmuch
+.config/mbsync
 {{ end }}
