@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ "$(hostname)" = "waynepc" ]
+then
+    task -WAITING and -PARENT and \(+OVERDUE or +DUETODAY\) _ids | {
+	while read -r i
+	do
+	    echo "[0] - $(task _get "$i.description" 2> /dev/null)"
+	done } | sort --unique > ~/.calcurse/todo
+fi
