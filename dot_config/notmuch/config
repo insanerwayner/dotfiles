@@ -1,0 +1,20 @@
+[database]
+path=/home/wayne/.local/share/mail
+
+[user]
+name=Wayne Reeves
+primary_email=darthwayne@librem.one
+other_email=darthwayne@hotmail.com;wayne.reeves@outlook.com;
+
+[new]
+tags=unread;inbox;
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true
+
+[crypto]
+gpg_path=gpg
