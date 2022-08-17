@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # PATH
-PATH=$PATH:$HOME/.local/bin:$HOME/bin/tmuxstatus
+PATH=$PATH:$HOME/.local/bin
 export PATH
 # GPG TTY
 GPG_TTY=$(tty)
@@ -10,7 +10,6 @@ export GPG_TTY
 # Editors
 export EDITOR='nvim'
 export VISUAL='nvim'
-export LEDGER_FILE=~/ledger/master.ledger
 
 # URL Viewer
 
