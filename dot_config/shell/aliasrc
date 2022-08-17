@@ -1,19 +1,12 @@
 # Command Aliases
+alias vim='nvim'
 alias cls=clear
-alias profile='source ~/.bashrc'
-alias editp='vim ~/.bashrc'
-alias ccat='pygmentize -g'
 alias wttr='curl wttr.in/75090'
-alias upd='sudo apt update && sudo apt upgrade -y'
 alias dic='sdcv'
-alias please='sudo $(fc -ln -1)'
 alias email="neomutt"
-alias mpass='lpass show live.com -p'
 alias upgrade='sudo apt update && sudo apt upgrade --allow-downgrades -y && sudo apt autoremove -y && flatpak upgrade --noninteractive'
 alias ':q'='exit'
-alias tess='tmux copy-mode'
 alias ls='exa'
-alias mus='ncmpcpp'
 #alias bat='batcat'
 alias ll='ls -alFh --git'
 alias diatheke='diatheke -b ESV2011 -f plain'
@@ -50,5 +43,3 @@ alias qcal='calcurse -Q --filter-type=cal -d 7'
 
 # Connect to Work VPN
 alias work='sudo openfortivpn connect.lifepathsystems.org -u wreeves -p "$(pass ccmhmr.local | head -n1 )" --otp="$(pass otp ccmhmr.local)" --otp-delay=15'
-alias tman='tmux display-popup -E man'
-alias tpop='tmux popup -E'
