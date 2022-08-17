@@ -15,13 +15,13 @@ recurrence=1
 defaultwidth=150                                        # Default Width
 nag=                                                    # No Nagging
 displayweeknumber=no                                    # No Week Numbers in Calendar
-include ~/.task/wayne.holidays			        # Holidays
+include ~/.local/share/task/wayne.holidays			        # Holidays
 calendar.holidays=full
-data.location=~/.task                                   # Files
+data.location=~/.local/share/task                                   # Files
 #dateformat=m/d/y                                       # Date Format
 bulk=5                                                  # Min amount of Tasks to start asking for Confirmation
 verbose=blank,label,new-id,edit,affected,project        # hush!b
-include ~/.task/wayne.theme				# Color theme
+include ~/.local/share/task/wayne.theme				# Color theme
 #include /usr/share/task/dark-16.theme
 allow.empty.filter=no
 undo.style=side
