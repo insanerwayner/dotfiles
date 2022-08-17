@@ -38,7 +38,7 @@ color status brightyellow default
 set delete=yes
 set text_flowed = yes
 set reflow_text=yes
-set mailcap_path = $HOME/.mailcap
+#set mailcap_path = $HOME/.mailcap
 auto_view text/calendar application/ics
 macro attach "I" "<pipe-entry>~/bin/add_to_calcurse<enter><exit>" 
 set forward_format = "FW: %s"                                   # format of subject when forwarding
