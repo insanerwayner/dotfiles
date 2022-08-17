@@ -1,0 +1,24 @@
+defaults
+auth	on
+tls	on
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile	""
+
+account librem
+host smtp.librem.one
+port 587
+from darthwayne@librem.one
+user darthwayne@librem.one
+passwordeval "pass mutt-wizard-librem"
+
+
+account outlook
+host smtp-mail.outlook.com
+port 587
+from wayne.reeves@outlook.com
+user wayne.reeves@outlook.com
+passwordeval "pass mutt-wizard-outlook"
+
+
+
+
