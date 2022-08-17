@@ -11,11 +11,17 @@
 # Use the command 'task show' to see all defaults and overrides
 
 #default.command=next                                    # Default Command
+{{ if eq .chezmoi.hostname "waynemini" }}
 recurrence=1
+{{ end }}
+{{ if ne .chezmoi.hostname "waynemini" }}
+recurrence=0
+{{ end }}
 defaultwidth=150                                        # Default Width
 nag=                                                    # No Nagging
 displayweeknumber=no                                    # No Week Numbers in Calendar
 include ~/.local/share/task/wayne.holidays			        # Holidays
+include ~/.local/share/task/{{ .chezmoi.group }}.holidays			        # Holidays
 calendar.holidays=full
 data.location=~/.local/share/task                                   # Files
 #dateformat=m/d/y                                       # Date Format
