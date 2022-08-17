@@ -25,9 +25,9 @@ alias today='task today'
 alias weight='task weight'
 
 # Ledger aliases
-alias eledg='vim + ~/ledger/register.ledger && cd ~/ledger && git diff'
-alias ladd='hledger add -f ~/ledger/register.ledger && vim +LedgerSort +wq ~/ledger/register.ledger && cd ~/ledger && git diff'
-alias sladd='hledger add -f ~/ledger/savings.ledger && vim +LedgerSort +wq ~/ledger/savings.ledger && cd ~/ledger && git diff'
+alias eledg="vim + $LEDGER/register.ledger && cd $LEDGER && git diff"
+alias ladd='hledger add -f $LEDGER/register.ledger && vim +LedgerSort +wq $LEDGER/register.ledger && cd $LEDGER && git diff'
+alias sladd='hledger add -f $LEDGER/savings.ledger && vim +LedgerSort +wq $LEDGER/savings.ledger && cd $LEDGER && git diff'
 alias lbudg='hledger bal budget --flat -E --auto'
 alias lefuture='hledger future'
 alias lbal='hledger print -x --auto | ledger -f - bal Assets and not Assets:HomeEscrow "Liabilities:Credit Cards" budget'

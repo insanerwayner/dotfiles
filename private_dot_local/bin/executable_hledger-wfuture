@@ -8,4 +8,4 @@ forecast="
 ~ every Friday  Weekly Weight
     (Assets:Weight)     -$amt LB
 "
-echo "$forecast" | hledger -f - -f ~/ledger/weight.ledger print assets -V --forecast="from tomorrow" | ledger -f - reg -H --tail 26
+echo "$forecast" | hledger -f - -f $LEDGER/weight.ledger print assets -V --forecast="from tomorrow" | ledger -f - reg -H --tail 26
