@@ -1,0 +1,5 @@
+{{ if ne .chezmoi.hostname "waynemini" }}
+.config/mutt
+.config/msmtp
+.config/notmuch
+{{ end }}
