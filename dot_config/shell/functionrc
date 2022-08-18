@@ -81,3 +81,30 @@ lscolor()
     echo
     done
     }
+
+rbbl()
+    {
+    vfile="$HOME/.sword/verses2.txt"
+    case "$1" in 
+
+        "-b" )  match="1"
+                verse=$(cut -d, -f $match $vfile | uniq | shuf -n1)
+            ;;
+        "-c" )  match="1,2"
+                verse="$(cut -d, -f $match $vfile  --output-delimiter=" "  | uniq | shuf -n1)"
+            ;;
+        ""|"-v" )  match="1,2,3"
+                verse="$(shuf -n1 $vfile | cut -d, -f $match --output-delimiter=:)"
+            ;;
+        "-h") echo "
+Gets random bible verse.
+    Usage:
+        -b = book
+        -c = chapter
+        -v = verse
+"
+                return 1
+                ;;
+    esac
+    diatheke -b ESV2001 -k "$verse" | grep -v "(ESV2001)"
+    }
