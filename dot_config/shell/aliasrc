@@ -9,8 +9,10 @@ alias ':q'='exit'
 alias ls='exa'
 #alias bat='batcat'
 alias ll='ls -alFh --git'
-alias diatheke='diatheke -b ESV2011 -f plain'
+alias diatheke='diatheke -b ESV2001 -f plain'
 alias bbl='diatheke'
+alias rc='chezmoi edit --apply'
+alias chez='chezmoi'
 
 # Task Warrior Aliases
 alias 7days='task 7days'
@@ -33,10 +35,8 @@ alias fundapp='w3m -dump https://puri.sm/fund-your-app/  | grep "Goal\|Top" -C 3
 # JRNL
 alias tih='jrnl -today-in-history'
 
-
 #get movie showtimes
 alias stimes="w3m -dump https://www.cinemark.com/theatres/tx-sherman/cinemark-sherman | sed -n '/^\ $/d; /Luxury/d; /Add\ to/d; /Details\ Trailer/d; /Digital\ Cinema/d; /Descriptive\ Narration/d; /Showtimes\ for/,/updates/p' | sed '/^[[:space:]]*$/d'"
-
 
 # Calendar
 alias qcal='calcurse -Q --filter-type=cal -d 7'
