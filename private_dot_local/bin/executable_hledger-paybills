@@ -9,6 +9,15 @@ function get_trans()
     faketime "$today" hledger -f $LEDGER/budget.ledger print --forecast="until $(faketime "$today" hledger-payday)" tag:"$tag"
     }
 
+function pay_credit()
+    {
+    credit=$(hledger bal Liabilities:Credit --no-total -O csv | cut -d, -f 1,2 --output-delimiter='  ' | tail -n +2 | tr -d \"-)
+    while IFS= read -r owed
+    do
+        printf "%s ! Credit Payment\n  %s\n  checking\n\n" "$today" "$owed"
+    done <<< $credit 
+    }
+
 for tag in "${tags[@]}"
 do
 
@@ -37,4 +46,5 @@ do
     esac
 
 # after writing to files sort 'register.ledger' and get ready to input pay amount in vim
-done && nvim -c "LedgerSort" -c "?paycheck" -c "/USD" -c "norm n3bd3wi " -c "noh" -c "startinsert" $LEDGER/register.ledger 
+done && pay_credit >> $LEDGER/register.ledger \
+         && nvim -c "LedgerSort" -c "?paycheck" -c "/USD" -c "norm n3bd3wi " -c "noh" -c "startinsert" $LEDGER/register.ledger 
