@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$(hostname)" = "waynepc" ]
+if [ "$(hostnamectl hostname)" = "waynemini" ]
 then
     task -WAITING and -PARENT and \(+OVERDUE or +DUETODAY\) _ids | {
 	while read -r i

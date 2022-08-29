@@ -49,7 +49,7 @@ set index_format="%2C %zt%zs %?X?A& ? %D %-20.20F %s %* \ %4c"    # index format
 #set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s" # index format
 set pager_format="-%Z- %C/%m: %-20.20n   %s%*  -- (%P)"
 set sidebar_format = '%B %*  %?N?%N?'
-#set sidebar_on_right
+set sidebar_on_right
 # Need to set some CSS for emails before these can be used
 #macro compose \e5 "F pandoc -s -f markdown -t html -H '/home/wayne/.config/mutt/github-markdown.css'  \ny^T^Utext/html; charset=us-ascii\n" 
 #macro compose \e6 "F pandoc -s -f html -t markdown  \ny^T^Utext/plain; charset=us-ascii\n" 

@@ -14,7 +14,8 @@ function pay_credit()
     credit=$(hledger bal Liabilities:Credit --no-total -O csv | cut -d, -f 1,2 --output-delimiter='  ' | tail -n +2 | tr -d \"-)
     while IFS= read -r owed
     do
-        printf "%s ! Credit Payment\n  %s\n  checking\n\n" "$today" "$owed"
+        desc=$(echo "$owed" | cut -d: -f 3 | cut -d\  -f 1)
+        printf "%s %s Credit Payment\n  ; bill:\n  %s\n  checking\n\n" "$today" "$desc" "$owed"
     done <<< $credit 
     }
 

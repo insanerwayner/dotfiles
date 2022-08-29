@@ -1,7 +1,7 @@
 # Command Aliases
 alias vim='nvim'
 alias cls=clear
-alias wttr='curl wttr.in/75090'
+alias wttr='curl wttr.in/75090\?u'
 alias dic='sdcv'
 alias email="neomutt"
 alias upgrade='sudo apt update && sudo apt upgrade --allow-downgrades -y && sudo apt autoremove -y && flatpak upgrade --noninteractive'
@@ -25,7 +25,8 @@ alias ladd='hledger add -f $LEDGER/register.ledger && vim +LedgerSort +wq $LEDGE
 alias sladd='hledger add -f $LEDGER/savings.ledger && vim +LedgerSort +wq $LEDGER/savings.ledger && cd $LEDGER && git diff'
 alias lbudg='hledger bal budget --flat -E --auto'
 alias lefuture='hledger future'
-alias lbal='hledger print -x --auto | ledger -f - bal Assets and not Assets:HomeEscrow "Liabilities:Credit Cards" budget'
+#alias lbal='hledger print -x --auto | ledger -f - bal Assets and not Assets:HomeEscrow "Liabilities:Credit Cards" budget'
+alias lbal='hledger bal --auto Assets not:Assets:HomeEscrow Liabilities:Credit budget'
 alias lwfuture='lweight bal assets --forecast -b today -W -H --transpose --pretty-tables'
 alias hl='hledger'
 
