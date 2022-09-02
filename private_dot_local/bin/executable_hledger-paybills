@@ -1,12 +1,11 @@
 #!/bin/bash
 tags=(paycheck savings bill autopay payperiod)
 today=$(date "+%Y-%m-%d")
-echo "$today"
 
 function get_trans()
     {
     tag=$1
-    faketime "$today" hledger -f $LEDGER/budget.ledger print --forecast="until $(faketime "$today" hledger-payday)" tag:"$tag"
+    hledger -f $LEDGER/budget.ledger print --forecast="until $(hledger-payday)" tag:"$tag"
     }
 
 function pay_credit()
