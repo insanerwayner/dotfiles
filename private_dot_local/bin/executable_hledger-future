@@ -4,10 +4,10 @@ futuretotals()
     {
     printf "End of Pay Period (%s):\n\n" "$(date -d "$(hledger-payday) -1 days" +"%Y-%m-%d")"
     hledger bal Assets:BofTX --flat --auto "$@" 
-    hledger -f $LEDGER/master.ledger print -R | 
-        hledger -f - -f $LEDGER/budget.ledger bal Assets:BofTX \
+    hledger bal Assets:BofTX \
         --forecast -p "every 14 days from $(hledger-payday) to $(hledger-payday 16)" \
-        -H --pretty-tables --transpose "$@"
+        -H --pretty-tables --transpose --auto "$@"
     }
 
-printf "\n%s\n\n" "$(futuretotals "$@" |  sed '/Ending/d; s/--/──/g')" 
+#printf "\n%s\n\n" "$(futuretotals "$@" |  sed '/Ending/d; s/--/──/g')" 
+futuretotals "$@"
