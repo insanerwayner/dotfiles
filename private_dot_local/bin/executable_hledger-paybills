@@ -1,4 +1,4 @@
-#!/bin/bash
+#!usr/bin/env bash
 tags=(paycheck savings bill autopay payperiod)
 today=$(date "+%Y-%m-%d")
 
