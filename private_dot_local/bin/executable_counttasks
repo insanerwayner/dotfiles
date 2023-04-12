@@ -1,0 +1,8 @@
+#!/bin/sh
+alias task='task rc.gc=off'
+due="$(task +OVERDUE _ids | wc -w)"
+active="$(task +ACTIVE _ids | wc -w)"
+[ "$active" -eq 1 ] && currenttask=$(task +ACTIVE _ids | task _get "$(cat /dev/stdin)".description) && active="$(task +ACTIVE _ids)"
+[ "$due" -gt 0 ] && [ "$active" -gt 0 ] && echo "$(echo "#[bg=colour155] $active $currenttask #[bg=colour202] $due #[bg=colour214]" | tr -s '[:blank:]')" && exit
+[ "$due" -gt 0 ] && echo "#[bg=colour202] $due #[bg=colour214]" && exit
+[ "$active" -gt 0 ] && echo "$(echo "#[bg=colour155] $active $currenttask #[bg=colour214]" | tr -s '[:blank:]')" && exit 
