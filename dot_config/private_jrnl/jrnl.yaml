@@ -5,10 +5,10 @@ colors:
   title: blue
 default_hour: 9
 default_minute: 0
-editor: vim
+editor: nvim
 encrypt: false
 highlight: true
-indent_character: '|'
+indent_character: ' '
 journals:
   default:
     encrypt: true
@@ -20,4 +20,4 @@ linewrap: 79
 tagsymbols: '@,^'
 template: false
 timeformat: '%Y-%m-%d %I:%M%p'
-version: v2.5
+version: v4.1
