@@ -23,11 +23,12 @@ alias weight='task weight'
 # Ledger aliases
 alias eledg="vim + $LEDGER/register.ledger && cd $LEDGER && git diff"
 alias ladd='hledger add -f $LEDGER/register.ledger && vim +LedgerSort +wq $LEDGER/register.ledger && cd $LEDGER && git diff'
+alias liadd='hledger iadd -f $LEDGER/register.ledger && vim +LedgerSort +wq $LEDGER/register.ledger && cd $LEDGER && git diff'
 alias sladd='hledger add -f $LEDGER/savings.ledger && vim +LedgerSort +wq $LEDGER/savings.ledger && cd $LEDGER && git diff'
 alias lbudg='hledger bal budget --flat -E --auto'
 alias lefuture='hledger future'
 #alias lbal='hledger print -x --auto | ledger -f - bal Assets and not Assets:HomeEscrow "Liabilities:Credit Cards" budget'
-alias lbal='hledger bal --auto Assets not:Assets:HomeEscrow Liabilities:Credit budget'
+alias lbal='hledger bal --auto Assets not:Assets:HomeEscrow Liabilities:Credit'
 alias lwfuture='lweight bal assets --forecast -b today -W -H --transpose --pretty-tables'
 alias hl='hledger'
 
@@ -45,3 +46,4 @@ alias qcal='calcurse -Q --filter-type=cal -d 7'
 
 # Connect to Work VPN
 alias work='sudo openfortivpn connect.lifepathsystems.org -u wreeves -p "$(pass ccmhmr.local | head -n1 )" --otp="$(pass otp ccmhmr.local)" --otp-delay=15'
+alias mayne='mosh --ssh="ssh -p 2233" wayne@darthwayne.duckdns.org'
