@@ -3,7 +3,7 @@
 futuretotals()
     {
     hledger bal Assets:BofTX \
-        --forecast -p "every 14 days from $(hledger-payday) to $(hledger-payday 25)" \
+        --forecast -p "every 14 days from $(hledger-payday -1) to $(hledger-payday 25)" \
         -H --pretty-tables --transpose --auto "$@"
     }
 
