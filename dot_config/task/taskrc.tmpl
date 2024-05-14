@@ -11,10 +11,10 @@
 # Use the command 'task show' to see all defaults and overrides
 
 #default.command=next                                    # Default Command
-{{ if eq .chezmoi.hostname "waynemini" }}
+{{ if eq .chezmoi.hostname "wayneair" }}
 recurrence=1
 {{ end }}
-{{ if ne .chezmoi.hostname "waynemini" }}
+{{ if ne .chezmoi.hostname "wayneair" }}
 recurrence=0
 {{ end }}
 defaultwidth=150                                        # Default Width
@@ -115,6 +115,16 @@ report.donethisweek.columns=end.formatted,description.count,end.iso
 #report.donethisweek.dateformat=a
 report.donethisweek.sort=end+
 report.donethisweek.filter=end.before:today end.after:-7d +COMPLETED -PARENT -DELETED
+
+# Overdue is before today
+report.overdue.filter=status:pending and due.before:today
+
+# Deleted
+report.deleted.description=tasks deleted
+report.deleted.columns=end.formatted,description.count,end.iso
+#report.deleted.dateformat=a
+report.deleted.sort=end+
+report.deleted.filter=+DELETED
 
 uda.weight.type=numeric
 uda.weight.label=Weight
