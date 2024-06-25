@@ -1,10 +1,10 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
 futuretotals()
     {
-    hledger bal Assets:BofTX \
+    hledger bal Assets:BofTX:Savings$ Assets:BofTX:Checking$ \
         --forecast -p "every 14 days from $(hledger-payday -1) to $(hledger-payday 25)" \
-        -H --pretty-tables --transpose --auto "$@"
+        -H --pretty-tables --transpose --auto --drop 2 "$@"
     }
 
 futuretotals "$@"
