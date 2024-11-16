@@ -1,0 +1,97 @@
+/* General Styles */
+* {
+    font-family: "Inter";
+    font-size: 22px;
+    min-height: 22px;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0.6); /* Background color */
+    border-width: 2px;
+    border-color: rgba(229, 85, 0, 0.6); /* Highlight color */
+    border-style: solid;
+    border-radius: 10px;
+    color: #ffffff; /* Primary color */
+    padding: 10px;
+    margin-top: 15px;
+}
+
+/* Button Styles */
+button {
+    border: 0px;
+    margin: 2px 0;
+    color: #bbc2cf; /* Secondary color */
+    border-style: solid;
+}
+
+button:hover,
+#workspaces button:hover {
+    background: #f0f004; /* Hover background color */
+    color: #000000
+}
+
+button.focused {
+    background-color: #f0f004; /* Highlight color */
+    border-style: solid;
+}
+
+button:hover {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#workspaces button {
+    border-radius: 10px;
+    padding: 0px 10px 0px 5px;
+    margin: 5px 0px 5px 3px;
+}
+
+#workspaces button.visible {
+    color: #bbc2cf; /* Secondary color */
+    background-color: #ff5f00; /* Accent color */
+    color: #ffffff
+}
+
+#workspaces button.focused.current_output {
+    color: #ffffff; /* Primary color */
+    background-color: #f0f004; /* Highlight color */
+}
+
+#workspaces button.urgent {
+    color: #000000; /* Urgent text color */
+    background-color: #7bc275; /* Urgent background color */
+}
+
+/* Specific Modules Styles */
+#clock, #battery, #network, #pulseaudio, #workspaces {
+    padding: 1px 10px;
+    color: #f0f004; /* Urgent background color */
+    font-family: "Inter";
+    font-size: 18px;
+}
+
+#battery {
+    color: #7bc275; /* Urgent background color */
+}
+
+#battery.charging,
+#custom-cpu_speed {
+    color: #f0f004; /* Urgent background color */
+}
+
+#battery.low:not(.charging) {
+    color: #f0f004;
+}
+
+#battery.warning:not(.charging) {
+    color: #ff5f00;
+}
+
+#battery.critical:not(.charging) {
+    color: #e50000;
+}
+
+#pulseaudio {
+    color: #0058a1;
+}
+

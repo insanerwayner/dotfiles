@@ -1,0 +1,107 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 7,
+    "margin-right": 7,
+    "margin-left": 7,
+    "modules-left": [ "hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "idle_inhibitor", "pulseaudio", "network", "battery"],
+    "hyprland/mode": {
+        "format": " {}"
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "disable-markup": false,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "󰎤",
+            "2": "󰎧",
+            "3": "󰎪",
+            "4": "󰎭",
+            "5": "󰎱",
+            "6": "󰎳",
+            "default": ""
+        }
+    },                     
+    "hyprland/window": {
+        "icon": true,
+        "format": "{title}",
+        "align": "right"
+    }, 
+    "clock": {
+        "format": "{:%a %b %e %I:%M %p}",
+        "on-click": "kitty calcurse",
+        "tooltip-format": "<span font='Agave Nerd Font 18'>{calendar}</span>",
+	"calendar": {
+		"mode"          : "month",
+		"mode-mon-col"  : 3,
+		"weeks-pos"     : "none",
+		"on-scroll"     : 1,
+		"on-click-right": "mode",
+                "format": {
+                          "days":      "<span color='#f0f004'><b>{}</b></span>",
+                          "today":      "<span color='#ff5f00'>{}</span>",
+                          "months":      "<span color='#ff5f00'>{}</span>",
+                          "year":      "<span color='#ff5f00'>{}</span>"
+                     }
+        }
+    },
+    "battery": {
+        "format": "{icon}    {capacity}% - {time}",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": "{H}h{M}m",
+        "format-charging": "  {icon}    {capacity}% - {time}",
+        "format-full": " {icon}    Charged",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+
+        },
+        "tooltip": false,
+        "on-click": "2"
+    },
+    "network": {
+        "format": "{icon}",
+        "format-alt": "{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-right",
+        //"format-wifi": "    {essid} ({signalStrength}%)",
+        "format-wifi": " ",
+        "format-ethernet": " {ifname}",
+        "format-disconnected": "⚠ Disconnected",
+        // "on-click": "kitty ~/sway/scripts/network-manager",
+        // "on-click": "gnome-control-center wifi",
+        "on-click": "kitty nmtui",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format-alt": "{icon:2} {volume:4}% - {desc}",
+        "format-bluetooth": " {icon:2} {volume:4}% - {desc}",
+        "format": "{icon:2} {volume:4}%",
+        "format-alt-click": "click-right",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": [" ", " ", " ", " "],
+            "default": ["", "", "", ""]
+        },
+        "scroll-step": 2,
+        "on-click": "~/.local/bin/pick_audio",
+        "tooltip": false
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-alt": "{icon}  idle {status}",
+        "format-alt-click": "click-right",
+        "format-icons": {
+            "activated": "  ",
+            "deactivated": "  "
+        },
+        "tooltip": false
+    },
+
+    "tray": {
+        "icon-size": 22,
+        "spacing": 12
+    }
+}
