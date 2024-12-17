@@ -10,6 +10,8 @@ export EDITOR="nvim"
 export TERMINAL="kitty"
 export BROWSER="brave-browser"
 
+export SSH_AGENT_PID=""
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -29,4 +31,7 @@ export TASKDATA="${XDG_DATA_HOME:-$HOME/.local/share}/task"
 export DOTREMINDERS="${XDG_DATA_HOME:-$HOME/.local/share}/remind/reminders"
 export GNUPGHOME="$HOME/.gnupg"
 export SWORD_PATH="$XDG_DATA_HOME/sword"
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
+#export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
+export HYPRSHOT_DIR="$HOME/Pictures/Screenshots"
+
+if [ -e /home/wayne/.nix-profile/etc/profile.d/nix.sh ]; then . /home/wayne/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

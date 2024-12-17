@@ -11,6 +11,7 @@ setopt correct
 
 # Load aliases and shortcuts if existent.
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" 2>/dev/null
+source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/aliasrc" 2>/dev/null
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/functionrc" 2>/dev/null
 
 # Basic auto/tab complete:
@@ -58,6 +59,7 @@ function command_not_found_handler()
     fi
     }
 
+eval "$(zoxide init zsh)"
 # starship prompt
 eval "$(starship init zsh)"
 

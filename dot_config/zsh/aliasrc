@@ -1,0 +1,70 @@
+# vi: ft=zsh
+alias -s {md,conf,json,ledger}='vim --'
+
+lbal() {
+    # Default parameters
+    local default_args=(Assets not:Assets:HomeEscrow Liabilities:Credit not:weight --drop 1)
+    local width=$(tput cols)  # Get the current terminal width
+
+    # Run the command with default arguments and any additional arguments
+    hledger bal --auto "${default_args[@]}" "$@" | awk -v term_width="$width" '
+        {
+            line_length = length($0)
+            if (line_length > max_length) {
+                max_length = line_length + 1 # Find the longest line
+            }
+            lines[NR] = $0  # Store all lines for reprocessing
+        }
+        END {
+            # Determine the uniform padded width
+            padded_width = max_length + 2  # Add one space before and after for padding
+            if (padded_width > term_width) padded_width = term_width  # Ensure it fits terminal width
+
+            # Left padding for alignment
+            left_padding = sprintf("%*s", padded_width - max_length - 1, "")
+
+            # Print lines with uniform padding and background color
+            for (i = 1; i <= NR; i++) {
+                line = lines[i]
+                if (length(line) < max_length) {
+                    right_padding = sprintf("%*s", max_length - length(line), " ")
+                    padded_line = left_padding line right_padding
+                } else {
+                    padded_line = left_padding substr(line, 1, max_length)
+                }
+
+                # Apply coloring rules
+                if (line ~ /-.*USD/) {
+                    print "\033[41;30m" padded_line "\033[0m"  # Red background with black text
+                } else if (line ~ /Budget/) {
+                    print "\033[43;30m" padded_line "\033[0m"  # Yellow background with black text
+                } else if (line ~ /BofTX/) {
+                    print "\033[42;30m" padded_line "\033[0m"  # Green background with black text
+                } else if (line ~ /(Gift Cards|AppleCash)/) {
+                    print "\033[44;30m" padded_line "\033[0m"  # Blue background with black text
+                } else if (line ~ /--/) {
+                    print "\033[30;40m" padded_line "\033[0m"
+                } else {
+                    print "\033[47;30m" padded_line "\033[0m"  # White with black text
+                }
+            }
+
+            # Create a properly formatted and pahdded legend
+            #legend_items = "Budget:BofTX:Gift Cards:Negative"
+            #split(legend_items, legend_array, ":")
+
+            #legend_line = left_padding
+            #for (j in legend_array) {
+            #    color = (legend_array[j] == "Budget" ?l "\033[43;30m" :
+            #             legend_array[j] == "BofTX" ? "\033[42;30m" :
+            #             legend_array[j] == "Gift Cards" ? "\033[44;30m" :
+            #             "\033[41;30m")
+            #    legend_line = legend_line color " " legend_array[j] " " "\033[0m"
+            #}
+            ##print "\n\033[1mLegend:\033[0m"
+            #print ""
+            #print legend_line
+        }
+    '
+}
+

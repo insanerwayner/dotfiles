@@ -28,9 +28,10 @@ alias sladd='hledger add -f $LEDGER/savings.ledger && vim +LedgerSort +wq $LEDGE
 alias lbudg='hledger bal budget --flat -E --auto'
 alias lefuture='hledger future'
 #alias lbal='hledger print -x --auto | ledger -f - bal Assets and not Assets:HomeEscrow "Liabilities:Credit Cards" budget'
-alias lbal='hledger bal --auto Assets not:Assets:HomeEscrow Liabilities:Credit'
+#alias lbal='hledger bal --auto Assets not:Assets:HomeEscrow Liabilities:Credit'
 alias lwfuture='lweight bal assets --forecast -b today -W -H --transpose --pretty-tables'
 alias hl='hledger'
+alias cbal='lbal not:"(savings|gift cards|weight)"'
 
 # Get Status of Fund App
 alias fundapp='w3m -dump https://puri.sm/fund-your-app/  | grep "Goal\|Top" -C 3'
