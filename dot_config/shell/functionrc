@@ -1,4 +1,4 @@
-# vim: filetype=sh
+# vim: filetype=bash
 # Functions
 
 function tm {
@@ -70,4 +70,17 @@ Gets random bible verse.
                 ;;
     esac
     diatheke -b ESV2001 -k "$verse" | grep -v "(ESV2001)"
+    }
+
+verseoftheday()
+    {
+    date="$(date +%F)"
+    cachefile="$HOME/.cache/versoftheday"
+    if [ -f "$cachefile" ] && [ "$(head -n1 $cachefile)" = "$date" ]
+    then
+        tail -n +2 "$cachefile"
+    else
+        verse="$(rbbl)"
+        printf "%s\n%s\n" "$date" "$verse" | tee "$cachefile" | tail -n +2
+    fi
     }
