@@ -12,6 +12,7 @@ vim.opt.modeline = false                  -- Disable modelines for security
 vim.opt.wrap = false                      -- No Wrap long lines
 vim.opt.linebreak = true                  -- Wrap lines at convenient points
 vim.opt.list = false                      -- Disable 'list' to prevent 'linebreak' issues
+vim.g.mapleader = " "
 -- vim.cmd('syntax off')                      -- Enable syntax highlighting
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax on')
@@ -81,13 +82,13 @@ require("lazy").setup({
   { "godlygeek/tabular" },
   { "ledger/vim-ledger" },
   { "kirasok/cmp-hledger" },
-  { "sirjofri/vim-biblereader" },
 
   -- Utility plugins
   { "jamessan/vim-gnupg" },
-  { "glacambre/firenvim", run = function() vim.fn["firenvim#install"](0) end },
   { "alx741/vinfo" },
   { "tpope/vim-vinegar" },
+  { "tpope/vim-fugitive" },
+  { "lewis6991/gitsigns.nvim" },
 
   -- LSP and completion plugins
   { "neovim/nvim-lspconfig" },
@@ -165,3 +166,24 @@ require('nvim-treesitter.configs').setup({
     additional_vim_regex_highlighting = false,
   },
 })
+
+require('gitsigns').setup({
+  -- Any other config you want...
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    -- A local helper for mapping
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Keymap for regular floating preview
+    map("n", "<leader>hp", gs.preview_hunk)          
+    -- Keymap for inline preview
+    map("n", "<leader>hi", gs.preview_hunk_inline)   
+    -- You could do more (stage/revert hunks, etc.) if you like.
+  end
+})
+
