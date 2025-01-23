@@ -45,69 +45,66 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'colorscheme adwaita',
 })
 
--- Plugin management with packer.nvim
--- Ensure packer.nvim is installed
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({
-      'git',
-      'clone',
-      '--depth',
-      '1',
-      'https://github.com/wbthomason/packer.nvim',
-      install_path,
-    })
-    vim.cmd('packadd packer.nvim')
-    return true
-  end
-  return false
+-- init.lua (excerpt)
+
+-- 1) Make sure lazy.nvim is installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  -- If lazy.nvim not found, clone it
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
--- Plugins
-require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-
+-- 2) Set up your plugin list as a Lua table
+require("lazy").setup({
   -- Appearance plugins
-  use 'Mofiqul/adwaita.nvim'            -- Adwaita theme for Neovim
-  use 'junegunn/goyo.vim'               -- Distraction-free writing
-  use 'ap/vim-css-color'                -- Highlight CSS colors in code
+  {
+    "Mofiqul/adwaita.nvim",
+    -- If you have config for these plugins, you can
+    -- add it in a config function here.
+    -- config = function()
+    --   vim.cmd("colorscheme adwaita")
+    -- end
+  },
+  { "junegunn/goyo.vim" },
+  { "ap/vim-css-color" },
 
   -- Filetype-specific plugins
-  use 'preservim/vim-markdown'          -- Markdown support
-  use 'godlygeek/tabular'               -- Text alignment
-  use 'ledger/vim-ledger'               -- Ledger file support
-  use 'kirasok/cmp-hledger'             -- hledger completion  
-  use 'sirjofri/vim-biblereader'        -- Bible reading plugin
+  { "preservim/vim-markdown" },
+  { "godlygeek/tabular" },
+  { "ledger/vim-ledger" },
+  { "kirasok/cmp-hledger" },
+  { "sirjofri/vim-biblereader" },
 
   -- Utility plugins
-  use 'jamessan/vim-gnupg'              -- Transparent editing of GPG files
-  use 'glacambre/firenvim'              -- Embed Neovim in web pages
-  use 'alx741/vinfo'                    -- Info file viewer
-  use 'tpope/vim-vinegar'               -- netrw enhancement
+  { "jamessan/vim-gnupg" },
+  { "glacambre/firenvim", run = function() vim.fn["firenvim#install"](0) end },
+  { "alx741/vinfo" },
+  { "tpope/vim-vinegar" },
 
   -- LSP and completion plugins
-  use 'neovim/nvim-lspconfig'           -- Configurations for Neovim LSP
-  use 'williamboman/mason.nvim'         -- Portable package manager
-  use 'williamboman/mason-lspconfig.nvim' -- Mason extension for lspconfig
-  use 'hrsh7th/nvim-cmp'                -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'            -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-buffer'              -- Buffer source for nvim-cmp
-  use 'hrsh7th/cmp-path'                -- Path source for nvim-cmp
-  use 'hrsh7th/vim-vsnip'               -- Snippet engine
+  { "neovim/nvim-lspconfig" },
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/vim-vsnip" },
 
-  -- Treesitter for enhanced syntax highlighting
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+  },
+}, {})
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
 
 -- Mason and LSP configurations
 require('mason').setup()
