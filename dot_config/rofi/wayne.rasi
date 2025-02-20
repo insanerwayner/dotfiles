@@ -1,0 +1,166 @@
+/**
+ * Wayne's rofi-wayland theme 
+ * 
+ * Demonstrates defining color and style variables in `* { ... }`
+ * then referencing them with @variableName in subsequent blocks,
+ * matching the style of rofi's example themes. 
+ */
+* {
+    /* Font and global properties */
+    font: "Inter 22";
+    text-color: #ffffff;
+    background-color: rgba(0,0,0,0);
+    highlight: #e55500;          /* "highlight" border color */
+    accent: #ff5f00;            /* primary accent color */
+    secondary: #bbc2cf;         /* secondary text color */
+    hover: #f0f004;             /* "hover" highlight color */
+    input: #222222;
+    border-radius: 10;
+    spacing: 3;
+
+    /*
+     * You can also define "named" roles for normal, urgent, active, selected, etc.
+     * Then reference them in #element states. This is purely optional but can help
+     * replicate rofi's multi-state approach.
+     */
+    normal-foreground: @text-color;
+    normal-background: @background-color;
+
+    urgent-foreground: @text-color;
+    urgent-background: #e50000;  /* Example "urgent" color */
+
+    active-foreground: @text-color;
+    active-background: @hover;   /* or pick another color if preferred */
+
+    selected-normal-foreground: #000000;
+    selected-normal-background: @accent;
+
+    selected-urgent-foreground: #000000;
+    selected-urgent-background: #e50000;
+
+    selected-active-foreground: #000000;
+    selected-active-background: @hover;
+}
+
+/* The main window */
+#window {
+    border: 2;
+    border-color: @highlight;
+    padding: 10;
+    text-color: @text-color;
+    background-color: #000000;
+    width: 400px;
+}
+
+/* The root container for input + list */
+#mainbox {
+    border: 0;
+    padding: 0;
+}
+
+/* Optional bottom message line (e.g. errors) */
+#message {
+    border: 1px dash 0px 0px;
+    text-color: @secondary;
+    padding: 2px 0px 0px;
+}
+
+/* The list area (where drun/run entries appear) */
+#listview {
+    fixed-height: 0;
+    /* If you want a horizontal divider, you can apply border below */
+    border: 2px 0px 0px;
+    padding: 2px 0px 0px;
+    lines: 6; /* how many items shown at once */
+}
+
+/* Per-element states: normal, urgent, active, selected, etc. */
+element-text {
+    horizontal-align: 0.5;
+}
+#element.alternate.normal {
+    background-color: @normal-background;
+    text-color: @normal-foreground;
+}
+
+#element.normal.normal {
+    text-color: @normal-foreground;
+    background-color: @normal-background;
+}
+#element.normal.urgent {
+    text-color: @urgent-foreground;
+    background-color: @urgent-background;
+}
+#element.normal.active {
+    text-color: @active-foreground;
+    background-color: @active-background;
+}
+
+#element.selected.normal {
+    text-color: @selected-normal-foreground;
+    background-color: @selected-normal-background;
+}
+#element.selected.urgent {
+    text-color: @selected-urgent-foreground;
+    background-color: @selected-urgent-background;
+}
+#element.selected.active {
+    text-color: @selected-active-foreground;
+    background-color: @selected-active-background;
+}
+
+/* For *selected* items in the alternate row, 
+   match the same highlight as normal selected */
+#element.alternate.selected.normal {
+    text-color: @selected-normal-foreground;
+    background-color: @selected-normal-background;
+}
+#element.alternate.selected.urgent {
+    text-color: @selected-urgent-foreground;
+    background-color: @selected-urgent-background;
+}
+#element.alternate.selected.active {
+    text-color: @selected-active-foreground;
+    background-color: @selected-active-background;
+}
+
+/* The input bar at top (prompt, textbox, etc.) */
+#inputbar {
+    spacing: 0;
+    border: 0;
+    children: [ entry, case-indicator ];
+    background-color: @input;
+}
+
+/* Rofi's prompt label */
+#prompt {
+    text-color: @text-color;
+}
+
+/* The actual typed input area */
+#entry {
+    text-color: @text-color;
+}
+
+/* The colon after the prompt (":") */
+#textbox-prompt-colon {
+    expand: false;
+    str: ":";
+    margin: 0px 0.3em 0em 0em;
+    text-color: @text-color;
+}
+
+/* Mode switcher (if you press Tab to switch modes) */
+#mode-switcher {
+    border: 1px dash 0px 0px;
+}
+
+/* The buttons used by the mode-switcher if present */
+#button normal {
+    text-color: @text-color;
+}
+#button selected {
+    text-color: @selected-normal-foreground;
+    background-color: @selected-normal-background;
+}
+
