@@ -14,6 +14,9 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.api.nvim_buf_set_keymap(0, 'n', '{', '?^\\d<CR>', { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(0, 'n', '}', '/^\\d<CR>', { noremap = true, silent = true })
 
+    -- case insensitive search
+    vim.opt.ignorecase = true
+
     -- Set colorscheme for ledger files
     vim.cmd('colorscheme adwaita')
 
