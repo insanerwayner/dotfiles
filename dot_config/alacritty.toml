@@ -1,0 +1,30 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/blood_moon.toml"
+]
+
+[font]
+size = 18.0
+
+[font.normal]
+family = "JetBrains Mono Thin"
+
+[hints]
+
+[mouse]
+hide_when_typing = false
+
+[window]
+decorations = "none"
+dynamic_padding = false
+opacity = 0.9
+blur = true
+startup_mode = "Maximized"
+
+[window.dimensions]
+columns = 114
+lines = 29
+
+[window.padding]
+x = 30
+y = 30
