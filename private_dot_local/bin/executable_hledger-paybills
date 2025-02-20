@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-tags=(paycheck savings bill autopay payperiod)
+tags=(paycheck savings bill credit autopay payperiod)
 today=$(date "+%Y-%m-%d")
 
 function get_trans()
     {
     tag=$1
-    hledger -f $LEDGER/budget.ledger print --forecast="until $(hledger-payday)" tag:"$tag"
+    hledger -f "$LEDGER/budget.ledger" print --forecast="until $(hledger-payday)" tag:"$tag"
     }
 
 function pay_credit()
@@ -15,7 +15,7 @@ function pay_credit()
     do
         desc=$(echo "$owed" | cut -d: -f 3 | cut -d\  -f 1)
         printf "%s %s Credit Payment\n  ; bill:\n  %s\n  checking\n\n" "$today" "$desc" "$owed"
-    done <<< $credit 
+    done <<< "$credit"
     }
 
 for tag in "${tags[@]}"
@@ -23,29 +23,35 @@ do
 
     case "$tag" in
 
-        savings | bill)
+        savings | bill )
             # change date to today; leave transaction unmarked
-            get_trans "$tag" | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/'"$today"'/g;/generated-transaction/d' >> $LEDGER/register.ledger
+            get_trans "$tag" | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/'"$today"'/g;/generated-transaction/d' >> "$LEDGER/register.ledger"
             ;;
         
         paycheck )
-            # keep date intact; mark transaction cleared
-            get_trans "$tag" | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/& */g;/generated-transaction/d' >> $LEDGER/register.ledger
-            ;;
-            
-        autopay )
-            # keep date intact; mark transaction pending
-            get_trans "$tag" | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/& !/g;/generated-transaction/d' >> $LEDGER/register.ledger
+            read -rp "Paycheck amount: " payamt
+            get_trans "$tag" | sed -E \
+              -e 's/([0-9]{4}-[0-9]{2}-[0-9]{2})/\1 */g' \
+              -e '/generated-transaction/d' \
+              -e 's|(Assets:BofTX:Checking\s+)[0-9]+(\.[0-9]+)?(\s+USD)|\1'"$payamt"' \3|' \
+              >> "$LEDGER/register.ledger"
             ;;
 
-        payperiod)
+        credit )
+            pay_credit >> "$LEDGER/register.ledger"
+            ;;
+
+        autopay )
+            # keep date intact; mark transaction pending
+            get_trans "$tag" | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/& !/g;/generated-transaction/d' >> "$LEDGER/register.ledger"
+            ;;
+
+        payperiod )
             # keep date intact; mark transaction cleared
-            get_trans "$tag" | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/& */g;/generated-transaction/d' > $LEDGER/payday.ledger
+            get_trans "$tag" | sed 's/[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/& */g;/generated-transaction/d' > "$LEDGER/payday.ledger"
             ;;
 
     esac
 
 # after writing to files sort 'register.ledger' and get ready to input pay amount in vim
-done && pay_credit >> $LEDGER/register.ledger \
-         && nvim -c "LedgerSort" -c "wq" $LEDGER/register.ledger \
-            && nvim -c "?paycheck" -c "/USD" -c "norm n3bd3wi " -c "noh" -c "startinsert" $LEDGER/register.ledger
+done && nvim -c "LedgerSort" -c "w" -c \?Paycheck -c noh "$LEDGER/register.ledger"

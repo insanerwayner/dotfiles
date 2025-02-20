@@ -1,37 +1,33 @@
 #!/bin/sh
-case "${1#[-+]}" in
-    "" ) depth=0
-        ;;
+anchor_date="2024-01-05"   # Example anchor payday; replace with your own known payday.
 
-    *[!0-9]*  )
+case "${1#[-+]}" in
+    "" )
+        depth=0
+        ;;
+    *[!0-9]* )
         echo "\"$1\" is not a valid integer" 1>&2
         exit 1
         ;;
-
-    * ) depth=$1
+    * )
+        depth=$1
         ;;
 esac
 
-parity=$(($(date +%-W) %2))
-day=$(date +%u)
+days_since=$(( ( $(date +%s) - $(date -d "$anchor_date" +%s) ) / 86400 ))
 
-if [ "$parity" -eq 1 ]
-then
-    if [ "$day" -ge 5  ]
-    then
-        payday=$(date -d "next Friday + 1 week" +%F)
-    else
-        payday=$(date -d "Friday" +%F)
-    fi
+offset=$(( days_since % 14 ))
+
+if [ "$offset" -eq 0 ]; then
+    # That means TODAY is exactly a payday, next payday is 14 days away
+    days_until_next=14
 else
-    daysahead=$((-day+12))
-    payday=$(date -d "+ $daysahead days" +%F)
+    # Next payday is (14 - offset) days from today
+    days_until_next=$(( 14 - offset ))
 fi
 
-if [ "$depth" != 0 ]
-then
-    depth=$((depth*2))
-    payday=$(date -d "$payday +$depth weeks" +%F)
-fi
+base_payday=$(date -d "+$days_until_next days" +%F)
+days_ahead=$(( depth * 14 ))
+payday=$(date -d "$base_payday +$days_ahead days" +%F)
 
 echo "$payday"
