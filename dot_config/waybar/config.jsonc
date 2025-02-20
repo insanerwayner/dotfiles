@@ -1,15 +1,15 @@
 {
-    "layer": "top",
+    "layer": "bottom",
     "position": "top",
+    /*"height": 50,*/
     "margin-top": 7,
     "margin-right": 7,
     "margin-left": 7,
-    "modules-left": [ "hyprland/workspaces", "hyprland/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "idle_inhibitor", "pulseaudio", "network", "battery"],
-    "hyprland/mode": {
-        "format": " {}"
-    },
+    "fixed-center": true,
+    "modules-left": [ "hyprland/workspaces", "hyprland/window" ],
+    "modules-center": [ "clock"],
+    "modules-right": ["custom/nowplaying", "tray", "pulseaudio", "network", "battery"],
+    "reload_style_on_change": true,
     "hyprland/workspaces": {
         "disable-scroll": false,
         "disable-markup": false,
@@ -21,9 +21,22 @@
             "4": "󰎭",
             "5": "󰎱",
             "6": "󰎳",
-            "default": ""
+            "7": "󰎶",
+            "8": "󰎹",
+            "9": "󰎼",
+            "10": "󰎡",
+            "default": "󱓻"
         }
     },                     
+    "custom/nowplaying": {
+        "exec": "~/.local/bin/now_playing",
+        "interval": 5,
+        "max-length": 35,
+        "tooltip": false,
+        "rewrite": {
+            " ": ""
+        }
+    },
     "hyprland/window": {
         "icon": true,
         "format": "{title}",
@@ -32,7 +45,7 @@
     "clock": {
         "format": "{:%a %b %e %I:%M %p}",
         "on-click": "kitty calcurse",
-        "tooltip-format": "<span font='Agave Nerd Font 18'>{calendar}</span>",
+        "tooltip-format": "<span font='JetBrains Mono 18'>{calendar}</span>",
 	"calendar": {
 		"mode"          : "month",
 		"mode-mon-col"  : 3,
@@ -53,8 +66,9 @@
         "format-time": "{H}h{M}m",
         "format-charging": "  {icon}    {capacity}% - {time}",
         "format-full": " {icon}    Charged",
-        "interval": 30,
+        "interval": 10,
         "states": {
+            "low": 50,
             "warning": 25,
             "critical": 10
 
@@ -68,11 +82,11 @@
         "format-alt-click": "click-right",
         //"format-wifi": "    {essid} ({signalStrength}%)",
         "format-wifi": " ",
-        "format-ethernet": " {ifname}",
+        "format-ethernet": "  {ifname}",
         "format-disconnected": "⚠ Disconnected",
         // "on-click": "kitty ~/sway/scripts/network-manager",
         // "on-click": "gnome-control-center wifi",
-        "on-click": "kitty nmtui",
+        "on-click": "kitty --title=nmtui-term -e nmtui && kitty @ send-text --match title:nmtui-term $'\x0c'",
         "tooltip": false
     },
     "pulseaudio": {
