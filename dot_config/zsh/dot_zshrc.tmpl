@@ -58,18 +58,17 @@ eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 
 # Load syntax highlighting; should be last.
-#source ~/projects/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-{{ end }}
+{{ end -}}
 {{ if eq .chezmoi.osRelease.id "debian" -}}
 source /usr/share/zsh/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/zsh-syntax-highlighting.zsh 2>/dev/null
-{{ end }}
-{{ if eq .chezmoi.osRelease.id "fedora" -}}
+{{ end -}}
+{{ if eq .chezmoi.osRelease.id "fedora" "fedora-asahi-remix" -}}
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-{{ end }}
+{{- end }}
 
 verseoftheday | fmt -su
