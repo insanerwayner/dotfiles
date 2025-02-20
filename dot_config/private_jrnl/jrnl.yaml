@@ -20,4 +20,4 @@ linewrap: 79
 tagsymbols: '@,^'
 template: false
 timeformat: '%Y-%m-%d %I:%M%p'
-version: v4.1
+version: v4.2
