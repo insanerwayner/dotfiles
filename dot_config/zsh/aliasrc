@@ -43,7 +43,7 @@ lbal() {
                 } else if (line ~ /(Gift Cards|AppleCash)/) {
                     print "\033[44;30m" padded_line "\033[0m"  # Blue background with black text
                 } else if (line ~ /--/) {
-                    print "\033[30;40m" padded_line "\033[0m"
+                    #print "\033[30;40m" padded_line "\033[0m"
                 } else {
                     print "\033[47;30m" padded_line "\033[0m"  # White with black text
                 }
@@ -67,4 +67,13 @@ lbal() {
         }
     '
 }
-
+ 
+bblg() {
+    verses=$(diatheke -b 'ESV2001' -s phrase -k "$1" |
+        sed -e 's/ --/\n--/' -e 's/\([0-9]\)\([A-Za-z]\)/\1\n\2/g' -e 's/; /\n/g' -e 's/-- /\n/g' |
+            sed -e '/\(Entries\|matches\)/d' -e '/^$/d')
+    results=$(echo "$verses" | xargs diatheke -b 'ESV2001' -f plain -k)
+    query=$(echo "$verses" | tr \\n '|' | sed 's/\ |/|/g')
+    echo "$results" | ack "$query""$1"
+    #echo "$query"
+}
