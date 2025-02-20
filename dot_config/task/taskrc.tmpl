@@ -20,7 +20,6 @@ recurrence=0
 defaultwidth=150                                        # Default Width
 nag=                                                    # No Nagging
 displayweeknumber=no                                    # No Week Numbers in Calendar
-include ~/.local/share/task/wayne.holidays			        # Holidays
 include ~/.local/share/task/{{ .chezmoi.group }}.holidays			        # Holidays
 calendar.holidays=full
 data.location=~/.local/share/task                                   # Files
@@ -28,7 +27,6 @@ data.location=~/.local/share/task                                   # Files
 bulk=5                                                  # Min amount of Tasks to start asking for Confirmation
 verbose=blank,label,new-id,edit,affected,project        # hush!b
 include ~/.local/share/task/wayne.theme				# Color theme
-#include /usr/share/task/dark-16.theme
 allow.empty.filter=no
 undo.style=side
 # Aliases
@@ -37,13 +35,11 @@ alias.od=overdue
 urgency.user.tag.movies.coefficient=-5
 # Contexts
 context.me.read=-test and -school or (+school due.before=tomorrow)
-context.home.read=+home
+context.home.read=+home or +chores
+context.recurring.read=+CHILD
+context.oneoff.read=-CHILD -PARENT
 context.school.read=+school
 context.school.write=+school
-context.freelance.read=+freelance or +fourfeathers
-context.freelance.write=+freelance or +fourfeathers
-context.test.read=+test
-context.test.write=+test
 
 # Date Format
 #dateformat=m/d/y
@@ -142,7 +138,5 @@ uda.priority.values=H,M,,L
 
 color=on
 rule.color.merge=no
-news.version=2.6.0
 context.xmas.read=+christmas
 context.xmas.write=+christmas
-context=me
