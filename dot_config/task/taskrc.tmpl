@@ -20,13 +20,15 @@ recurrence=0
 defaultwidth=150                                        # Default Width
 nag=                                                    # No Nagging
 displayweeknumber=no                                    # No Week Numbers in Calendar
-include ~/.local/share/task/{{ .chezmoi.group }}.holidays			        # Holidays
+due=2
+include ~/.local/share/task/wayne.holidays			        # Holidays
+include ~/.local/share/task/wayne.holidays			        # Holidays
 calendar.holidays=full
 data.location=~/.local/share/task                                   # Files
 #dateformat=m/d/y                                       # Date Format
 bulk=5                                                  # Min amount of Tasks to start asking for Confirmation
 verbose=blank,label,new-id,edit,affected,project        # hush!b
-include ~/.local/share/task/wayne.theme				# Color theme
+include ~/.local/share/task/wayne.theme3				# Color theme
 allow.empty.filter=no
 undo.style=side
 # Aliases
@@ -52,8 +54,8 @@ report.projectstatus.sort=status+,end+,due+,urgency-
 report.projectstatus.filter=-DELETED
 
 # Next Report
-report.next.columns=id,depends,priority,project,tags,recur,scheduled.countdown,due.relative,description.count,urgency.integer
-report.next.labels=ID,Deps,P,Project,Tag,Recur,S,Due,Description,Urg
+report.next.columns=id,depends,priority,project,tags,recur,scheduled.relative,due.relative,description.count,urgency.integer
+report.next.labels=ID,Deps,P,Project,Tag,Recur,Sched,Due,Description,Urg
 report.next.sort=due+,urgency-
 
 # Items in next 7 days Report
