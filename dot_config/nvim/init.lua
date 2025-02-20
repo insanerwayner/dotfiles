@@ -3,8 +3,8 @@
 -- Basic settings
 vim.opt.number = true                     -- Show line numbers
 vim.opt.relativenumber = true             -- Show relative line numbers
-vim.opt.tabstop = 8                       -- Number of spaces that a <Tab> in the file counts for
-vim.opt.softtabstop = 0                   -- Number of spaces that a <Tab> counts for while performing editing operations
+vim.opt.tabstop = 4                       -- Number of spaces that a <Tab> in the file counts for
+vim.opt.softtabstop = 4                   -- Number of spaces that a <Tab> counts for while performing editing operations
 vim.opt.shiftwidth = 4                    -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true                  -- Use spaces instead of tabs
 vim.opt.autoindent = true                 -- Copy indent from current line when starting a new line
@@ -79,6 +79,7 @@ require("lazy").setup({
 
   -- Filetype-specific plugins
   { "preservim/vim-markdown" },
+  { "ellisonleao/glow.nvim" },
   { "godlygeek/tabular" },
   { "ledger/vim-ledger" },
   { "kirasok/cmp-hledger" },
@@ -187,3 +188,4 @@ require('gitsigns').setup({
   end
 })
 
+require('glow').setup()

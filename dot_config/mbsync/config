@@ -3,7 +3,7 @@ Host imap.librem.one
 Port  993
 User darthwayne@librem.one
 PassCmd "pass mutt-wizard-librem"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore librem-local
@@ -22,30 +22,30 @@ SyncState *
 MaxMessages 0
 # End profile
 
-IMAPStore outlook-remote
-Host imap-mail.outlook.com
-Port  993
-User wayne.reeves@outlook.com
-PassCmd "pass mutt-wizard-outlook"
-SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-PipelineDepth 1
-
-MaildirStore outlook-local
-Subfolders Verbatim
-Path ~/.local/share/mail/outlook/
-Inbox ~/.local/share/mail/outlook/Inbox/
-Flatten .
-
-Channel outlook
-Expunge Both
-Far :outlook-remote:
-Near :outlook-local:
-Patterns * !"[Gmail]/All Mail"
-Create Both
-SyncState *
-MaxMessages 0
-# End profile
-
+# IMAPStore outlook-remote
+# Host imap-mail.outlook.com
+# Port  993
+# User wayne.reeves@outlook.com
+# PassCmd "pass Email/live.com/wayne.reeves@outlook.com"
+# TLSType IMAPS
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+# PipelineDepth 1
+# 
+# MaildirStore outlook-local
+# Subfolders Verbatim
+# Path ~/.local/share/mail/outlook/
+# Inbox ~/.local/share/mail/outlook/Inbox/
+# Flatten .
+# 
+# Channel outlook
+# Expunge Both
+# Far :outlook-remote:
+# Near :outlook-local:
+# Patterns * !"[Gmail]/All Mail"
+# Create Both
+# SyncState *
+# MaxMessages 0
+# # End profile
+# 
 
 
