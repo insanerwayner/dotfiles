@@ -15,7 +15,7 @@
     pager = delta
 
 [interactive]
-    diffFilter = delta --color-only
+    diffFilter = delta --color-only --max-line-length 0
 
 [include]
     path = ~/.config/delta/themes/themes.gitconfig
