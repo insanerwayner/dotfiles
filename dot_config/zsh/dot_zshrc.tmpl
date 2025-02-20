@@ -13,18 +13,17 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/aliasrc" 2>/dev/null
 source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/functionrc" 2>/dev/null
 typeset -gx lbal
 
-
 # Basic auto/tab complete:
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 _comp_options+=(globdots)
 source ~/.local/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+fpath=(~/.local/share/zsh/plugins/zsh-completions/src $fpath)
 compinit
 
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
-
 
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin

@@ -2,3 +2,7 @@
     type = "git-repo"
     url = "https://github.com/Aloxaf/fzf-tab"
     refreshPeriod = "168h"
+[".local/share/zsh/plugins/zsh-completions"]
+    type = "git-repo"
+    url = "https://github.com/zsh-users/zsh-completions"
+    refreshPeriod = "168h"
