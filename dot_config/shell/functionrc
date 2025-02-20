@@ -15,10 +15,6 @@ else
 fi
 }
 
-function info
-    {
-    vim -c "Vinfo $1" -c 'silent only'
-    }
 
 function tax
     {
