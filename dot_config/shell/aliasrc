@@ -14,6 +14,7 @@ alias diatheke='diatheke -b ESV2001 -f plain'
 alias bbl='diatheke'
 alias rc='chezmoi edit --apply'
 alias chez='chezmoi'
+alias info='pinfo'
 
 # Task Warrior Aliases
 alias 7days='task 7days'
