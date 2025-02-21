@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# Define possible layouts
+LAYOUTS=(Master Dwindle)
+
+# Build the rofi command as an array so we don’t have to fight with quotes
+ROFI_CMD=(
+  rofi
+  -dmenu
+  -hover-select
+  -me-select-entry
+  ''
+  -me-accept-entry
+  MousePrimary
+)
+
+# We can then pass it like this:
+selection="$(printf "%s\n" "${LAYOUTS[@]}" | "${ROFI_CMD[@]}")"
+
+# Hyprland commands
+layout="hyprctl keyword general:layout"
+layoutmsg="hyprctl dispatch layoutmsg"
+
+function Master {
+  local menu=(Right Left Bottom Top Center)
+  # Reuse the same rofi array
+  local selection
+  selection="$(printf "%s\n" "${menu[@]}" | "${ROFI_CMD[@]}")"
+  selection="$(echo "$selection" | tr '[:upper:]' '[:lower:]')"
+  $layout master
+  $layoutmsg orientation"$selection"
+  $layoutmsg swapwithmaster
+}
+
+function Dwindle {
+  $layout dwindle
+}
+
+# Finally, call the function that matches the user's selection
+case "$selection" in
+  Master)
+    Master
+    ;;
+  Dwindle)
+    Dwindle
+    ;;
+  *)
+    echo "Nothing selected or unknown selection."
+    ;;
+esac
+
