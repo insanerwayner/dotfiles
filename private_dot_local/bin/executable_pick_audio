@@ -1,0 +1,14 @@
+#!/bin/bash
+ROFI_CMD=(
+    rofi 
+    -dmenu
+    -hover-select
+    -me-select-entry
+    ''
+    -me-accept-entry
+    MousePrimary
+)
+allsinks=$(pactl --format json list sinks)
+selection=$(echo $allsinks | jq '.[] | .description' | tr -d \" | "${ROFI_CMD[@]}" | sed -e 's/\(.*\)/"\1"/' )
+newsink=$(echo $allsinks | jq '.[] | select(.description=='"$selection"') | .name' | tr -d \")
+pactl set-default-sink "$newsink"
