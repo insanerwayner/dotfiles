@@ -1,6 +1,5 @@
-export ZDOTDIR="$HOME/.config/zsh"
-
 # profile file. Runs on login. Environmental variables are set here.
+export ZDOTDIR="$HOME/.config/zsh"
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
@@ -31,7 +30,6 @@ export TASKDATA="${XDG_DATA_HOME:-$HOME/.local/share}/task"
 export DOTREMINDERS="${XDG_DATA_HOME:-$HOME/.local/share}/remind/reminders"
 export GNUPGHOME="$HOME/.gnupg"
 export SWORD_PATH="$XDG_DATA_HOME/sword"
-#export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
 export HYPRSHOT_DIR="$HOME/Pictures/Screenshots"
 
 if [ -e /home/wayne/.nix-profile/etc/profile.d/nix.sh ]; then . /home/wayne/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
