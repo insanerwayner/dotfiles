@@ -30,5 +30,5 @@ appearance.emptyline=yes
 general.multipledays=yes
 general.systemevents=yes
 appearance.emptyday=  
-format.appointmenttime=%:%M
+format.appointmenttime=%I:%M%p
 
