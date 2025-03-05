@@ -7,7 +7,6 @@
 
 window#waybar {
     background: rgba(0, 0, 0, 0.6);/*  Background color */
-    /* background: rgba(229, 85, 0, 0.0);Highlight color */
     border-width: 2px;
     border-color: rgba(229, 85, 0, 0.0); /* Highlight color */
     border-style: solid;
@@ -41,26 +40,24 @@ button:hover {
     box-shadow: none;
 }
 
-#workspaces button {
-    border-radius: 10px;
-    padding: 0px 10px 0px 5px;
+#workspaces * {
     font-size: 22px;
 }
 
+#workspaces button {
+    background-color: rgba( 0, 0, 0, 0);
+}
+
 #workspaces button.visible {
-    color: #bbc2cf; /* Secondary color */
-    background-color: #ff5f00; /* Accent color */
-    color: #ffffff
+    color: #ff5f00
 }
 
 #workspaces button.focused.current_output {
-    color: #ffffff; /* Primary color */
-    background-color: #f0f004; /* Highlight color */
+    color: #f0f004;
 }
 
 #workspaces button.urgent {
-    color: #000000; /* Urgent text color */
-    background-color: #7bc275; /* Urgent background color */
+    color: #7bc275;
 }
 
 /* Specific Modules Styles */
@@ -71,7 +68,6 @@ button:hover {
     border-radius: 10px;
     margin: 5px;
     padding: 5px 12px 5px 12px;
-    font-size: 18px;
 }
 
 #clock {
