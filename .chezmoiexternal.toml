@@ -14,3 +14,8 @@
     type = "git-repo"
     url = "https://github.com/zsh-users/zsh-syntax-highlighting"
     refreshPeriod = "168h"
+[".local/share/fonts/"]
+    type = "archive"
+    url = "https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+    stripComponents = 2
+    include = ["fonts/ttf/*"]
