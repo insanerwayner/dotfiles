@@ -1,32 +1,32 @@
 /* General Styles */
 * {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     font-size: 22px;
     min-height: 22px;
 }
 
 window#waybar {
-    background: rgba(0, 0, 0, 0.6);/*  Background color */
+    background: rgba(0, 0, 0, 0.6);
     border-width: 2px;
-    border-color: rgba(229, 85, 0, 0.0); /* Highlight color */
+    border-color: rgba(229, 85, 0, 0);
     border-style: solid;
     border-radius: 10px;
-    color: #ffffff; /* Primary color */
+    color: #ffffff;
     padding: 10px;
     margin-top: 15px;
 }
 
 /* Button Styles */
 button {
-    border: 0px;
+    border: 0;
     margin: 2px 0;
-    color: #bbc2cf; /* Secondary color */
+    color: #bbc2cf;
     border-style: solid;
 }
 
 button:hover,
 #workspaces button:hover {
-    color: #f0f004; /* Hover background color */
+    color: #f0f004;
 }
 
 button:hover {
@@ -34,16 +34,17 @@ button:hover {
     box-shadow: none;
 }
 
+/* Workspaces Module Specific Styles */
 #workspaces * {
     font-size: 22px;
 }
 
 #workspaces button {
-    background-color: rgba( 0, 0, 0, 0);
+    background-color: transparent;
 }
 
 #workspaces button.visible {
-    color: #ff5f00
+    color: #ff5f00;
 }
 
 #workspaces button.focused.current_output {
@@ -54,78 +55,104 @@ button:hover {
     color: #7bc275;
 }
 
-/* Specific Modules Styles */
-#window, #tray, #clock, #battery, #network, #pulseaudio, #workspaces, #custom-nowplaying {
-    padding: 1px 10px;
-    color: #f0f004; /* Urgent background color */
+/* Module Container Styles */
+#window,
+#tray,
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#workspaces,
+#custom-nowplaying {
+    padding: 5px 12px;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     margin: 5px;
-    padding: 5px 12px 5px 12px;
+    color: #f0f004;
 }
 
+/* Clock Module */
 #clock {
     font-family: "JetBrains Mono, Bold";
     color: #ff5f00;
 }
 
+/* Window Module */
 #window {
     color: #99CCCC;
-    /*color: #ffffff;*/
-    /*background: linear-gradient(10deg , rgba(138, 184, 184, 0.6) 0%, rgba(221,221,4,0.6) 30%, rgba(235,88,0,0.6) 50%, rgba(138, 184, 184, 0.6) 90%);*/
 }
 
-window#waybar.empty #window {
-    background: rgba(0, 0, 0, 0);
-}
-
+window#waybar.empty #window,
 window#waybar.wofi #window {
-    background: rgba(0, 0, 0, 0);
+    background: transparent;
 }
 
+/* Battery Module with Enhanced Gradient Variance */
 #battery {
-    color: #7bc275; /* Urgent backgr ound color */
+  color: #7bc275;
 }
 
-#battery.charging,
-#custom-cpu_speed {
-    color: #ffffff;
-    background-color: rgba(111,175,105,0.6);
-    background: linear-gradient(90deg, rgba(111, 175, 105, 1) 0%, rgba(221,221,4,0.6) 60%, rgba(235,88,0,0.6) 70%, rgba(211,0,0,0.6) 80%);
+#battery.charging {
+  color: #ffffff;
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,0.95) 15%, 
+    rgba(221,221,4,0.9) 40%, 
+    rgba(235,88,0,0.85) 65%, 
+    rgba(211,0,0,0.8) 100%);
 }
 
 #battery.low.charging {
-    background: linear-gradient(90deg, rgba(111, 175, 105, 1) 0%, rgba(221,221,4,0.6) 40%, rgba(235,88,0,0.6) 60%, rgba(211,0,0,0.6) 70%);
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(221,221,4,0.9) 25%, 
+    rgba(235,88,0,0.85) 50%, 
+    rgba(211,0,0,0.8) 75%, 
+    rgba(211,0,0,0.8) 100%);
 }
 
 #battery.warning.charging {
-    background: linear-gradient(90deg, rgba(111, 175, 105, 1) 0%, rgba(221,221,4,0.6) 20%, rgba(235,88,0,0.6) 30%, rgba(211,0,0,0.6) 80%);
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(221,221,4,0.85) 15%, 
+    rgba(235,88,0,0.8) 35%, 
+    rgba(211,0,0,0.75) 60%, 
+    rgba(211,0,0,0.7) 100%);
 }
 
 #battery.critical.charging {
-    background: linear-gradient(90deg, rgba(111, 175, 105, 1) 0%, rgba(221,221,4,0.6) 10%, rgba(235,88,0,0.6) 20%, rgba(211,0,0,0.6) 30%);
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(221,221,4,0.8) 10%, 
+    rgba(235,88,0,0.75) 25%, 
+    rgba(211,0,0,0.7) 40%, 
+    rgba(211,0,0,0.65) 100%);
 }
 
-
 #battery.low:not(.charging) {
-    color: #f0f004;
+  color: #f0f004;
 }
 
 #battery.warning:not(.charging) {
-    color: #ff5f00;
+  color: #ff5f00;
 }
 
 #battery.critical:not(.charging) {
-    color: #e50000;
+  color: #e50000;
 }
 
+/* PulseAudio Module */
 #pulseaudio {
     color: #99CCCC;
 }
 
+/* Custom Now Playing Module */
 #custom-nowplaying {
     color: #ffffff;
-    background-color: rgba(138, 184, 184, 0.6);
-    background: linear-gradient(225deg , rgba(221,221,4,0.6) 0%, rgba(235,88,0,0.6) 70%);
-    background: linear-gradient(10deg , rgba(138, 184, 184, 0.6) 0%, rgba(221,221,4,0.6) 30%, rgba(235,88,0,0.6) 50%, rgba(138, 184, 184, 0.6) 90%);
+    background: linear-gradient(10deg,
+    rgba(138,184,184,0.6) 0%,
+    rgba(221,221,4,0.6) 30%,
+    rgba(235,88,0,0.6) 50%,
+    rgba(138,184,184,0.6) 90%);
 }
+
