@@ -80,3 +80,10 @@ verseoftheday()
         printf "%s\n%s\n" "$date" "$verse" | tee "$cachefile" | tail -n +2
     fi
     }
+
+cdiff()
+    {
+    chez_source=$(chezmoi source-path "$1")
+    diff --unchanged-line-format='%L' --old-line-format='- %L' --new-line-format='+ %L' "$1" "$chez_source"
+    }
+

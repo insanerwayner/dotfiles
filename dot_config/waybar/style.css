@@ -1,7 +1,7 @@
 /* General Styles */
 * {
     font-family: "Inter";
-    font-size: 18px;
+    font-size: 22px;
     min-height: 22px;
 }
 
@@ -26,13 +26,7 @@ button {
 
 button:hover,
 #workspaces button:hover {
-    background: #f0f004; /* Hover background color */
-    color: #000000;
-}
-
-button.focused {
-    background-color: #f0f004; /* Highlight color */
-    border-style: solid;
+    color: #f0f004; /* Hover background color */
 }
 
 button:hover {
