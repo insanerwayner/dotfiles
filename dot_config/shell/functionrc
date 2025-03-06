@@ -4,7 +4,7 @@
 function tm {
 
 if [ -t 1 ] && [ -z "$TMUX" ]; then
-    tmux attach -t dflt -d || tmux new -s dflt \; new-window -n tuir tuir \; new-window -n mail neomutt \; swap-window -s 1 -t 3
+    tmux attach -t dflt -d || tmux new -s dflt
     if [ -z "$SSH_CONNECTION" ]; then
         tmux set mouse on -t dflt
     else
