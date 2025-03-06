@@ -97,16 +97,18 @@ window#waybar.wofi #window {
     rgba(211,0,0,0.8) 100%);
 }
 
-#battery.low.charging {
+#battery.level-40.charging,
+#battery.level-50.charging {
   background: linear-gradient(90deg, 
     rgba(111,175,105,1) 0%, 
-    rgba(221,221,4,0.9) 25%, 
-    rgba(235,88,0,0.85) 50%, 
+    rgba(221,221,4,0.9) 35%, 
+    rgba(235,88,0,0.85) 45%, 
     rgba(211,0,0,0.8) 75%, 
     rgba(211,0,0,0.8) 100%);
 }
 
-#battery.warning.charging {
+#battery.level-20.charging,
+#battery.level-30.charging {
   background: linear-gradient(90deg, 
     rgba(111,175,105,1) 0%, 
     rgba(221,221,4,0.85) 15%, 
@@ -115,7 +117,7 @@ window#waybar.wofi #window {
     rgba(211,0,0,0.7) 100%);
 }
 
-#battery.critical.charging {
+#battery.level-10.charging {
   background: linear-gradient(90deg, 
     rgba(111,175,105,1) 0%, 
     rgba(221,221,4,0.8) 10%, 
@@ -124,15 +126,17 @@ window#waybar.wofi #window {
     rgba(211,0,0,0.65) 100%);
 }
 
-#battery.low:not(.charging) {
+#battery.level-50:not(.charging) {
   color: #f0f004;
 }
 
-#battery.warning:not(.charging) {
+#battery.level-40:not(.charging),
+#battery.level-30:not(.charging) {
   color: #ff5f00;
 }
 
-#battery.critical:not(.charging) {
+#battery.level-10:not(.charging),
+#battery.level-20:not(.charging) {
   color: #e50000;
 }
 

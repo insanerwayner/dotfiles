@@ -43,7 +43,7 @@
         "align": "right"
     }, 
     "clock": {
-        "format": "{:%a %b %e %I:%M %p}",
+        "format": "{:%a %b %d %I:%M %p}",
         "on-click": "kitty calcurse",
         "tooltip-format": "<span font='JetBrains Mono 18'>{calendar}</span>",
 	"calendar": {
@@ -68,10 +68,15 @@
         "format-full": " {icon}    Charged",
         "interval": 10,
         "states": {
-            "low": 50,
-            "warning": 25,
-            "critical": 10
-
+            "level-10": 10,
+            "level-20": 20,
+            "level-30": 30,
+            "level-40": 40,
+            "level-50": 50,
+            "level-60": 60,
+            "level-70": 70,
+            "level-80": 80,
+            "level-90": 90
         },
         "tooltip": false,
         "on-click": "2"
@@ -91,7 +96,7 @@
     },
     "pulseaudio": {
         "format-alt": "{icon:2} {volume:4}% - {desc}",
-        "format-bluetooth": " {icon:2} {volume:4}% - {desc}",
+        "format-bluetooth": " {icon:2} {volume:4}%",
         "format": "{icon:2} {volume:4}%",
         "format-alt-click": "click-right",
         "format-muted": "",
@@ -101,7 +106,7 @@
         },
         "scroll-step": 2,
         "on-click": "~/.local/bin/pick_audio",
-        "tooltip": false
+        "tooltip": true
     },
     "idle_inhibitor": {
         "format": "{icon}",
