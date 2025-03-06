@@ -1,4 +1,3 @@
-/* General Styles */
 * {
     font-family: "Inter", sans-serif;
     font-size: 22px;
@@ -16,7 +15,6 @@ window#waybar {
     margin-top: 15px;
 }
 
-/* Button Styles */
 button {
     border: 0;
     margin: 2px 0;
@@ -34,9 +32,25 @@ button:hover {
     box-shadow: none;
 }
 
-/* Workspaces Module Specific Styles */
+#window,
+#tray,
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#workspaces,
+#custom-nowplaying {
+    padding: 5px 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    margin: 5px;
+    color: #f0f004;
+}
+
 #workspaces * {
-    font-size: 22px;
+    font-size: 28px;
+    margin: 0px 2px;
+    padding: 0px 0px;
 }
 
 #workspaces button {
@@ -55,29 +69,11 @@ button:hover {
     color: #7bc275;
 }
 
-/* Module Container Styles */
-#window,
-#tray,
-#clock,
-#battery,
-#network,
-#pulseaudio,
-#workspaces,
-#custom-nowplaying {
-    padding: 5px 12px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    margin: 5px;
-    color: #f0f004;
-}
-
-/* Clock Module */
 #clock {
     font-family: "JetBrains Mono, Bold";
     color: #ff5f00;
 }
 
-/* Window Module */
 #window {
     color: #99CCCC;
 }
@@ -87,7 +83,6 @@ window#waybar.wofi #window {
     background: transparent;
 }
 
-/* Battery Module with Enhanced Gradient Variance */
 #battery {
   color: #7bc275;
 }
@@ -141,12 +136,10 @@ window#waybar.wofi #window {
   color: #e50000;
 }
 
-/* PulseAudio Module */
 #pulseaudio {
     color: #99CCCC;
 }
 
-/* Custom Now Playing Module */
 #custom-nowplaying {
     color: #ffffff;
     background: linear-gradient(10deg,
