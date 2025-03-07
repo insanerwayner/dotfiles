@@ -127,21 +127,29 @@ window#waybar.wofi #window {
 }
 
 #battery.level-50:not(.charging) {
-  color: #f0f004;
+      color: #f0f004;
 }
 
 #battery.level-40:not(.charging),
 #battery.level-30:not(.charging) {
-  color: #ff5f00;
+      color: #ff5f00;
 }
 
 #battery.level-10:not(.charging),
 #battery.level-20:not(.charging) {
-  color: #e50000;
+      color: #e50000;
 }
 
 #pulseaudio {
-    color: #99CCCC;
+    color: rgba(111,175,105,1);
+}
+
+#pulseaudio.bluetooth {
+      color: #99CCCC;
+}
+
+#pulseaudio.muted {
+      color: #ff5f00;
 }
 
 #custom-nowplaying {
