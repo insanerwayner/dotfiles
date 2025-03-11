@@ -65,7 +65,7 @@
         "format-icons": ["", "", "", "", ""],
         "format-time": "{H}h{M}m",
         "format-charging": "  {icon}    {capacity}% - {time}",
-        "format-full": " {icon}    Charged",
+        "format-full": " {icon} ",
         "interval": 10,
         "states": {
             "level-10": 10,
@@ -91,7 +91,7 @@
         "format-disconnected": "⚠ Disconnected",
         // "on-click": "kitty ~/sway/scripts/network-manager",
         // "on-click": "gnome-control-center wifi",
-        "on-click": "kitty --title=nmtui-term -e nmtui && kitty @ send-text --match title:nmtui-term $'\x0c'",
+        "on-click": "kitty --title=nmtui-term -e sh -c 'sleep .1; nmtui'",
         "tooltip": false
     },
     "pulseaudio": {
