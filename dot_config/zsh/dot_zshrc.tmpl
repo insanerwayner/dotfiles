@@ -24,6 +24,10 @@ compinit
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
+# bind the forward-delete key correctly:
+bindkey -M viins '^[[3~' delete-char
+bindkey -M vicmd '^[[3~' delete-char
+
 
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
