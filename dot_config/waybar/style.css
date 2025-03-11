@@ -91,39 +91,118 @@ window#waybar.wofi #window {
   color: #ffffff;
   background: linear-gradient(90deg, 
     rgba(111,175,105,1) 0%, 
-    rgba(111,175,105,0.95) 15%, 
-    rgba(221,221,4,0.9) 40%, 
-    rgba(235,88,0,0.85) 65%, 
+    rgba(111,175,105,0.95) 95%, 
+    rgba(221,221,4,0.9) 97%, 
+    rgba(235,88,0,0.85) 99%, 
     rgba(211,0,0,0.8) 100%);
 }
 
-#battery.level-40.charging,
-#battery.level-50.charging {
-  background: linear-gradient(90deg, 
-    rgba(111,175,105,1) 0%, 
-    rgba(221,221,4,0.9) 35%, 
-    rgba(235,88,0,0.85) 45%, 
-    rgba(211,0,0,0.8) 75%, 
-    rgba(211,0,0,0.8) 100%);
-}
-
-#battery.level-20.charging,
-#battery.level-30.charging {
-  background: linear-gradient(90deg, 
-    rgba(111,175,105,1) 0%, 
-    rgba(221,221,4,0.85) 15%, 
-    rgba(235,88,0,0.8) 35%, 
-    rgba(211,0,0,0.75) 60%, 
-    rgba(211,0,0,0.7) 100%);
-}
-
+/* Battery Charging – Level 10 */
+/* For very low charge, only 10% is pure green, then a quick shift toward red */
 #battery.level-10.charging {
   background: linear-gradient(90deg, 
     rgba(111,175,105,1) 0%, 
-    rgba(221,221,4,0.8) 10%, 
-    rgba(235,88,0,0.75) 25%, 
+    rgba(111,175,105,1) 10%, 
+    rgba(221,221,4,0.8) 15%, 
     rgba(211,0,0,0.7) 40%, 
-    rgba(211,0,0,0.65) 100%);
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 20 */
+/* The green extends further (20%), then a gentle transition starts */
+#battery.level-20.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 20%, 
+    rgba(221,221,4,0.85) 30%, 
+    rgba(235,88,0,0.8) 50%, 
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 30 */
+/* A bit more green, with a smoother progression through yellow to orange */
+#battery.level-30.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 30%, 
+    rgba(221,221,4,0.9) 40%, 
+    rgba(235,88,0,0.85) 55%, 
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 40 */
+/* Increasing the green portion and delaying the harsher reds */
+#battery.level-40.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 40%, 
+    rgba(221,221,4,0.9) 50%, 
+    rgba(235,88,0,0.85) 65%, 
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 50 */
+/* Half the bar is pure green, then a steady transition */
+#battery.level-50.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 50%, 
+    rgba(221,221,4,0.9) 60%, 
+    rgba(235,88,0,0.85) 75%, 
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 60 */
+/* More green area now, with the transition moved further right */
+#battery.level-60.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 60%, 
+    rgba(221,221,4,0.9) 70%, 
+    rgba(235,88,0,0.85) 80%, 
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 70 */
+/* Almost fully charged—the green dominates with a soft transition to red */
+#battery.level-70.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 70%, 
+    rgba(221,221,4,0.9) 75%, 
+    rgba(235,88,0,0.85) 85%, 
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 80 */
+/* A very high charge: almost all green with only a hint of the transition */
+#battery.level-80.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 80%, 
+    rgba(221,221,4,0.9) 85%, 
+    rgba(235,88,0,0.85) 90%, 
+    rgba(211,0,0,0.65) 100%
+  );
+}
+
+/* Battery Charging – Level 90 */
+/* Nearly full—with a very subtle transition toward red at the extreme end */
+#battery.level-90.charging {
+  background: linear-gradient(90deg, 
+    rgba(111,175,105,1) 0%, 
+    rgba(111,175,105,1) 90%, 
+    rgba(221,221,4,0.9) 95%, 
+    rgba(235,88,0,0.85) 98%, 
+    rgba(211,0,0,0.65) 100%
+  );
 }
 
 #battery.level-50:not(.charging) {
