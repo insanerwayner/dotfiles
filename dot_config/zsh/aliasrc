@@ -49,21 +49,6 @@ lbal() {
                 }
             }
 
-            # Create a properly formatted and pahdded legend
-            #legend_items = "Budget:BofTX:Gift Cards:Negative"
-            #split(legend_items, legend_array, ":")
-
-            #legend_line = left_padding
-            #for (j in legend_array) {
-            #    color = (legend_array[j] == "Budget" ?l "\033[43;30m" :
-            #             legend_array[j] == "BofTX" ? "\033[42;30m" :
-            #             legend_array[j] == "Gift Cards" ? "\033[44;30m" :
-            #             "\033[41;30m")
-            #    legend_line = legend_line color " " legend_array[j] " " "\033[0m"
-            #}
-            ##print "\n\033[1mLegend:\033[0m"
-            #print ""
-            #print legend_line
         }
     '
 }
