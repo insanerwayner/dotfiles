@@ -38,7 +38,7 @@ PS1='\n\[\e[1m\]\u@\h \w\n\[\e[0m\] \$ '
 [ -f "$HOME/.config/shell/aliasrc" ] && source "$HOME/.config/shell/aliasrc"
 [ -f "$HOME/.config/shell/functionrc" ] && source "$HOME/.config/shell/functionrc"
 
-# === Completion ===
+# === Completion (cross-distro safe) ===
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -47,9 +47,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# === Zoxide and fzf Integration ===
+# === Zoxide Integration ===
 command -v zoxide >/dev/null && eval "$(zoxide init bash)"
-command -v fzf >/dev/null && eval "$(fzf --bash)"
 
 # === Command not found handler ===
 command_not_found_handle() {
