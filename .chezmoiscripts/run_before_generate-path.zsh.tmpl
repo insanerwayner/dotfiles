@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+# ChezMoi script: .chezmoiscripts/run_before_generate-path.zsh.tmpl
+# Always regenerates a fresh dynamic PATH.
+
+mkdir -p "{{ .chezmoi.sourceDir }}/.chezmoidata"
+
+echo ""
+echo "==============================================================="
+echo "chezmoi: INFO: Regenerating .chezmoidata/path_dynamic.toml..."
+
+dynamic_part="${(j.:.)${(f)$(find $HOME/.local/bin -type d -printf '%p\n')}}"
+DYNAMIC_PATH="$PATH:/home/wayne/.nix-profile/bin:$dynamic_part:/usr/local/bin:/usr/bin"
+
+typeset -U path_array
+path_array=(${(s.:.)DYNAMIC_PATH})
+valid_paths=()
+for p in $path_array; do
+  [[ -d "$p" ]] && valid_paths+="$p"
+done
+DYNAMIC_PATH="${(j.:.)valid_paths}"
+
+print -r -- "path_dynamic = \"$DYNAMIC_PATH\"" > "{{ .chezmoi.sourceDir }}/.chezmoidata/path_dynamic.toml"
+
+echo "chezmoi: SUCCESS: Overwrote .chezmoidata/path_dynamic.toml with updated PATH."
+echo "chezmoi: NOTE: If this was your first 'chezmoi apply', please run 'chezmoi apply' again to finalize dynamic templates. Otherwise, you're all set!"
+echo "==============================================================="
