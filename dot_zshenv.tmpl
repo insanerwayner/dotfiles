@@ -1,8 +1,8 @@
 # profile file. Runs on login. Environmental variables are set here.
 export ZDOTDIR="$HOME/.config/zsh"
 
-# Adds `~/.local/bin` to $PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+# Completes the PATH variable
+export PATH="{{ .path_dynamic }}"
 
 # Default programs:
 export EDITOR="nvim"
@@ -33,5 +33,3 @@ export GNUPGHOME="$HOME/.gnupg"
 export SWORD_PATH="$XDG_DATA_HOME/sword"
 export HYPRSHOT_DIR="$HOME/Pictures/Screenshots"
 export ZSH_PLUGINS_DIR="$XDG_DATA_HOME/zsh/plugins"
-
-if [ -e /home/wayne/.nix-profile/etc/profile.d/nix.sh ]; then . /home/wayne/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

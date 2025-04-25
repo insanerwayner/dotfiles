@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+# ChezMoi script: .chezmoiscripts/run_generate-path.zsh.tmpl
+# Dynamically generates a deduplicated PATH value for inclusion in templates.
+
+# Ensure .chezmoidata directory exists
+mkdir -p "{{ .chezmoi.sourceDir }}/.chezmoidata"
+
+# Build up PATH additions from ~/.local/bin subdirectories
+dynamic_part="${(j.:.)${(f)$(find $HOME/.local/bin -type d -printf '%p\n')}}"
+
+# Combine with base PATH
+DYNAMIC_PATH="$PATH:/home/wayne/.nix-profile/bin:$dynamic_part:/usr/local/bin:/usr/bin"
+
+# Deduplicate
+typeset -U path_array
+path_array=(${(s.:.)DYNAMIC_PATH})
+
+# Filter out non-existent paths
+valid_paths=()
+for p in $path_array; do
+  [[ -d "$p" ]] && valid_paths+="$p"
+done
+
+# Final deduplicated, existing-path-only PATH
+DYNAMIC_PATH="${(j.:.)valid_paths}"
+
+# Write result to TOML format for inclusion via chezmoi.toml.tmpl
+print -r -- "path_dynamic = \"${DYNAMIC_PATH}\"" > "{{ .chezmoi.sourceDir }}/.chezmoidata/path_dynamic.toml"
+

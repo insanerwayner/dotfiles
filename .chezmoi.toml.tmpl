@@ -1,0 +1,4 @@
+[data]
+{{ (include ".chezmoidata/path_dynamic.toml" | fromToml) | toToml }}
+
+{{ include ".chezmoidata/merge_diff.toml" }}
