@@ -1,6 +1,10 @@
 # See https://wiki.hyprland.org/Configuring/Monitors/
+{{- if eq .chezmoi.hostname "waynemini" }}
+monitor = HDMI-A-1, 1920x1080@60, 0x0, 1
+monitor = DP-1, 1920x1080@60, 1920x0, 1
+{{- else }}
 monitor=,preferred,auto,1.25
-
+{{- end }}
 
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
@@ -29,7 +33,11 @@ exec = gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"   # 
 exec = ~/.config/waybar/waybar.sh
 
 env = QT_QPA_PLATFORMTHEME,qt6ct   # for Qt apps
+{{- if eq .chezmoi.hostname "waynemini" }}
+exec-once = sleep 5 && dex -a -e Hyprland
+{{- else }}
 exec-once = sleep 5 && /home/wayne/.local/bin/dex -a -e Hyprland
+{{- end }}
 
 # Set programs that you use
 $terminal = kitty
@@ -48,12 +56,21 @@ input {
     kb_layout = us
     kb_variant =
     kb_model =
+{{- if eq .chezmoi.hostname "waynemini" }}
+    kb_options = caps:escape_shifted_capslock, xkb_symbols:no_numlock_led
+{{- else }}
     kb_options = caps:escape_shifted_capslock, altwin:swap_lalt_lwin, xkb_symbols:no_numlock_led
+{{- end }}
     kb_rules =
 
 
+{{- if eq .chezmoi.hostname "waynemini" }}
+    follow_mouse = 1
+    mouse_refocus = true
+{{- else }}
     follow_mouse = 0
     mouse_refocus = false
+{{- end }}
     touchpad {
         natural_scroll = yes
         scroll_factor = 0.9
@@ -138,13 +155,17 @@ misc {
     animate_manual_resizes = false
 }
 
+{{- if eq .chezmoi.hostname "waynemini" }}
+workspace = r[1-5], monitor:HDMI-A-1
+workspace = r[6-0], monitor:DP-1
+{{- end }}
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
-windowrulev2 = float, title:^(Picture-in-Picture|Firefox)$
-windowrulev2 = size 640 360, title:^(Picture-in-Picture|Firefox)$
 windowrulev2 = pin, title:^(Picture-in-Picture|Firefox)$
-windowrulev2 = move 68.5% 6%, title:^(Picture-in-Picture|Firefox)$
 windowrulev2 = pseudo, title:^(Picture-in-Picture|Firefox)$
+windowrulev2 = float, title:^(Picture-in-Picture|Firefox)$
+windowrulev2 = size 480 270, title:^(Picture-in-Picture|Firefox)$
+windowrulev2 = move 1440 810, title:^(Picture-in-Picture|Firefox)$
 
 windowrulev2 = float, title:^(Variety Preferences)$
 windowrulev2 = center, title:^(Variety Preferences)$
@@ -156,7 +177,7 @@ windowrulev2 = float, title:^(Nextcloud)$
 windowrulev2 = size 1000 800, title:^(nmtui-term)$
 windowrulev2 = stayfocused, title:^(nmtui-term)$
 windowrulev2 = float, title:^(nmtui-term)$
-windowrulev2 = opacity 0.8, title:^(nmtui-term)$
+windowrulev2 = size 900 700, title:^(nmtui-term)$
 
 layerrule = animation slide bottom, rofi
 layerrule = dimaround, rofi
@@ -175,13 +196,13 @@ bind = $mainMod, C, killactive,
 bind = $mainMod, XF86Fn, killactive, 
 bind = Shift+$mainMod, Escape, exit, 
 bind = $mainMod, F, togglefloating, 
-bind = $mainMod, Escape, exec, /usr/bin/hyprlock
-bind = $mainMod, Backspace, exec, /home/wayne/.nix-profile/bin/hyprshot -m region
+bind = $mainMod, Escape, exec, hyprlock
+bind = $mainMod, Backspace, exec, hyprshot -m region
 bind = Shift+$mainMod, Backspace, exec, /home/wayne/.nix-profile/bin/hyprshot -m output
 bind = $mainMod, Super_L, exec, $menu
 #bind = $mainMod, Super_R, exec, $menu
 #bind = $mainMod, P, pseudo, # dwindle
-bind = $mainMod, P, exec, /usr/bin/zsh -c tessen
+bind = $mainMod, P, exec, tessen
 bind = $mainMod, J, togglesplit, # dwindle
 bind = Alt, Tab, layoutmsg, rollnext
 bind = Alt+$mainMod, J, layoutmsg, rollnext
