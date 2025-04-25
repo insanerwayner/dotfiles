@@ -1,0 +1,64 @@
+# ~/.bashrc — minimal, clean, bootstrap-ready (ChezMoi templated)
+
+# === Only run if interactive ===
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# === Dynamic PATH from chezmoi ===
+export PATH="{{ .path_dynamic }}"
+
+# === Core environment ===
+GPG_TTY=$(tty)
+export GPG_TTY
+export EDITOR='nvim'
+export VISUAL='nvim'
+export VIEWER='w3m'
+export WWW_HOME='wiby.me'
+export XDG_CONFIG_HOME="$HOME/.config"
+export PAGER='less'
+
+# === History Settings ===
+HISTTIMEFORMAT="%Y-%m-%d %T "
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+shopt -s histappend
+shopt -s checkwinsize
+
+# === Vi-mode ===
+set -o vi
+bind 'set show-mode-in-prompt on'
+
+# === Minimal Prompt ===
+PS1='\n\[\e[1m\]\u@\h \w\n\[\e[0m\] \$ '
+
+# === Load Aliases and Functions ===
+[ -f "$HOME/.config/shell/aliasrc" ] && source "$HOME/.config/shell/aliasrc"
+[ -f "$HOME/.config/shell/functionrc" ] && source "$HOME/.config/shell/functionrc"
+
+# === Completion ===
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# === Zoxide and fzf Integration ===
+command -v zoxide >/dev/null && eval "$(zoxide init bash)"
+command -v fzf >/dev/null && eval "$(fzf --bash)"
+
+# === Command not found handler ===
+command_not_found_handle() {
+  if [ -x /usr/lib/command-not-found ]; then
+    /usr/lib/command-not-found -- "$1"
+  elif [ -x /usr/share/command-not-found/command-not-found ]; then
+    /usr/share/command-not-found/command-not-found -- "$1"
+  else
+    printf "%s: command not found\n" "$1" >&2
+  fi
+  return 127
+}
