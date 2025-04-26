@@ -1,0 +1,12 @@
+{{ include ".chezmoidata/merge_diff.toml" }}
+
+[data]
+chassisType = "{{- if eq .chezmoi.os "darwin" -}}
+  {{- if contains "MacBook" (output "sysctl" "-n" "hw.model") -}}laptop{{- else -}}desktop{{- end -}}
+{{- else if eq .chezmoi.os "linux" -}}
+  {{- (output "hostnamectl" "--json=short" | mustFromJson).Chassis | trim -}}
+{{- else if eq .chezmoi.os "windows" -}}
+  {{- (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "if ((Get-CimInstance -Class Win32_Battery | Measure-Object).Count -gt 0) { Write-Output 'laptop' } else { Write-Output 'desktop' }") | trim -}}
+{{- else -}}
+  unknown
+{{- end }}"
