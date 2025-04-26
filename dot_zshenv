@@ -1,8 +1,12 @@
 # profile file. Runs on login. Environmental variables are set here.
 export ZDOTDIR="$HOME/.config/zsh"
 
-# Completes the PATH variable
-export PATH="{{ .path_dynamic }}"
+# Source environment variables if they exist
+if [ -d "${XDG_CONFIG_HOME:-$HOME/.config}/environment.d" ]; then
+  for envfile in "${XDG_CONFIG_HOME:-$HOME/.config}/environment.d/"*.conf; do
+    [ -f "$envfile" ] && source "$envfile"
+  done
+fi
 
 # Default programs:
 export EDITOR="nvim"

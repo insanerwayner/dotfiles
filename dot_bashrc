@@ -1,13 +1,15 @@
-# ~/.bashrc — minimal, clean, bootstrap-ready (ChezMoi templated)
-
 # === Only run if interactive ===
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# === Dynamic PATH from chezmoi ===
-export PATH="{{ .path_dynamic }}"
+# === Load environment variables if they exist ===
+if [ -d "${XDG_CONFIG_HOME:-$HOME/.config}/environment.d" ]; then
+  for envfile in "${XDG_CONFIG_HOME:-$HOME/.config}/environment.d/"*.conf; do
+    [ -f "$envfile" ] && source "$envfile"
+  done
+fi
 
 # === Core environment ===
 GPG_TTY=$(tty)
