@@ -1,0 +1,139 @@
+#!/usr/bin/python3
+import subprocess
+import re
+import itertools
+import sys
+from termcolor import colored
+from tabulate import tabulate
+
+def get_balance(account):
+    result = subprocess.run(
+        ["hledger", "bal", account, "-RC", "--format", "%(total)"],
+        stdout=subprocess.PIPE, text=True
+    )
+    balance = result.stdout.strip()
+    balance = re.sub(r'\s*USD\s*|[-]+', '', balance)
+    balance = balance.split('\n')[-1]
+    try:
+        return float(balance)
+    except ValueError as e:
+        print(f"Error converting balance to float: {e}")
+        return 0.0
+
+def get_transactions():
+    result = subprocess.run(
+        ["hledger", "print", "checking", "-P"],
+        stdout=subprocess.PIPE, text=True
+    )
+    output = result.stdout
+    result = subprocess.run(
+        ["hledger", "-f", "-", "reg", "-P", "checking", "-O", "csv", "-e", "tomorrow"],
+        input=output, stdout=subprocess.PIPE, text=True
+    )
+    transactions = result.stdout.strip().split('\n')[1:]
+    transactions = [t.split(',') for t in transactions]
+    transactions = [[re.sub(r'\s*USD\s*', '', f.strip('"')) for f in t] for t in transactions]
+    return transactions
+
+def highlight_differences(possible_combinations):
+    all_trans = set()
+    for combo in possible_combinations:
+        for trans in combo:
+            all_trans.add(tuple(trans))
+    
+    trans_count = {trans: sum(trans in (tuple(c) for c in combo) for combo in possible_combinations) for trans in all_trans}
+    
+    unique_transactions = {trans for trans, count in trans_count.items() if count == 1}
+    return unique_transactions
+
+def clear_transactions(combo):
+    for trans in combo:
+        date, description, amount = trans[1], trans[3], float(trans[5])
+        amount_str = f"{amount:.2f}"
+        
+        # Create hledger-edit query without "and"
+        query = f'date:"{date}" desc:"{description}" amt:"{amount_str}"'
+        
+        # Run hledger-edit to retrieve the exact transaction and clear it
+        command = f"VISUAL='sed -i \"s/{date} !/{date} */\"' hledger edit {query}"
+        print(f"Running command: {command}")
+        
+        result = subprocess.run(command, shell=True, capture_output=True, text=True)
+        print(f"Command output: {result.stdout}")
+        print(f"Command error: {result.stderr}")
+        
+    print(colored("Transactions cleared successfully!", "green"))
+
+def main():
+    if len(sys.argv) == 2:
+        checking_balance = float(sys.argv[1])
+        savings_balance = float(input("Savings Balance: "))
+    elif len(sys.argv) != 3:
+        checking_balance = float(input("Checking Balance: "))
+        savings_balance = float(input("Savings Balance: "))
+    else:
+        checking_balance = float(sys.argv[1])
+        savings_balance = float(sys.argv[2])
+
+    ledgbal = get_balance("checking")
+    sledgbal = get_balance("Assets:BofTX:Savings")
+
+    sdiff = round(savings_balance - sledgbal, 2)
+    if sdiff != 0:
+        if sdiff % 0.25 == 0:
+            print(colored(f"Possible quicksave entries missing in the amount of {sdiff:.2f} USD.\n", "yellow"))
+            checking_balance += sdiff
+        else:
+            print(f"Savings balance is off by {sdiff} USD")
+            return
+
+    total = round(ledgbal - checking_balance, 2)
+    if total == 0:
+        print(colored("Balance is Reconciled", "green"))
+        return
+    elif total < 0:
+        print("Enter bank balance")
+        return
+
+    transactions = get_transactions()
+    if not transactions:
+        print(colored("No matching transactions", "red"))
+        return
+
+    filtered_transactions = [trans for trans in transactions if abs(float(trans[5])) <= abs(total)]
+
+    possible_combinations = []
+    for i in range(1, len(filtered_transactions) + 1):
+        for combo in itertools.combinations(filtered_transactions, i):
+            trans_sum = round(sum(float(c[5]) for c in combo), 2)
+            if trans_sum == -abs(total):
+                possible_combinations.append(combo)
+    
+    if possible_combinations:
+        unique_transactions = highlight_differences(possible_combinations)
+        
+        for index, combo in enumerate(possible_combinations, start=1):
+            headers = [colored("Date", "cyan"), colored("Description", "cyan"), colored("Amount", "cyan")]
+            table_data = []
+            for trans in combo:
+                amount = colored(f"{float(trans[5]):.2f} USD", "red" if float(trans[5]) < 0 else "green")
+                if tuple(trans) in unique_transactions:
+                    row = [colored(trans[1], "yellow"), colored(trans[3], "yellow"), colored(amount, "yellow")]
+                else:
+                    row = [trans[1], trans[3], amount]
+                table_data.append(row)
+            table = tabulate(table_data, headers, tablefmt="fancy_grid")
+            print(colored(f"Possibly Cleared Combination {index}:", "yellow"))
+            print(table)
+
+        choice = int(input("Enter the number of the combination to clear: "))
+        if 1 <= choice <= len(possible_combinations):
+            clear_transactions(possible_combinations[choice - 1])
+        else:
+            print(colored("Invalid choice. No transactions cleared.", "red"))
+    else:
+        print(colored("No matching transactions", "red"))
+
+if __name__ == "__main__":
+    main()
+
