@@ -22,6 +22,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PAGER='less'
 
 # === History Settings ===
+export HISTFILE="${XDG_STATE_HOME}"/bash/history
 HISTTIMEFORMAT="%Y-%m-%d %T "
 HISTCONTROL=ignoreboth
 HISTSIZE=1000

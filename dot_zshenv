@@ -8,6 +8,12 @@ if [ -d "${XDG_CONFIG_HOME:-$HOME/.config}/environment.d" ]; then
   done
 fi
 
+# XDG Base Directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 # Default programs:
 export EDITOR="nvim"
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
@@ -16,9 +22,6 @@ export BROWSER="brave-browser"
 
 export SSH_AGENT_PID=""
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
 export LESSHISTFILE="-"
 export CALCHISTFILE="$XDG_CACHE_HOME/calchist"
 export HISTFILE="$XDG_DATA_HOME/history"
@@ -37,3 +40,11 @@ export GNUPGHOME="$HOME/.gnupg"
 export SWORD_PATH="$XDG_DATA_HOME/sword"
 export HYPRSHOT_DIR="$HOME/Pictures/Screenshots"
 export ZSH_PLUGINS_DIR="$XDG_DATA_HOME/zsh/plugins"
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
+export CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config"
+export CABAL_DIR="$XDG_DATA_HOME/cabal"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export W3M_DIR="$XDG_DATA_HOME/w3m"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
