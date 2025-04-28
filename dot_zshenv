@@ -1,5 +1,10 @@
-# profile file. Runs on login. Environmental variables are set here.
-export ZDOTDIR="$HOME/.config/zsh"
+# XDG Base Directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Source environment variables if they exist
 if [ -d "${XDG_CONFIG_HOME:-$HOME/.config}/environment.d" ]; then
@@ -8,48 +13,42 @@ if [ -d "${XDG_CONFIG_HOME:-$HOME/.config}/environment.d" ]; then
   done
 fi
 
-# XDG Base Directories
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
-
 # Default programs:
 export EDITOR="nvim"
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 export TERMINAL="kitty"
 export BROWSER="brave-browser"
 
-export SSH_AGENT_PID=""
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
-export LESSHISTFILE="-"
-export CALCHISTFILE="$XDG_CACHE_HOME/calchist"
-export HISTFILE="$XDG_DATA_HOME/history"
-export HISTSIZE=10000000
-export SAVEHIST=10000000
-export MBSYNCRC="$XDG_CONFIG_HOME/.config/mbsync/config"
-export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/.config/notmuch/config"
-export MAILSYNC_MUTE="mute"
-export PARALLEL_HOME="$XDG_CONFIG_HOME/parallel"
-export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
-export LEDGER="$XDG_DATA_HOME/ledger"
-export LEDGER_FILE="$LEDGER/master.ledger"
-export TASKDATA="$XDG_DATA_HOME/task"
-export DOTREMINDERS="$XDG_DATA_HOME/remind/reminders"
-export GNUPGHOME="$HOME/.gnupg"
-export SWORD_PATH="$XDG_DATA_HOME/sword"
-export HYPRSHOT_DIR="$HOME/Pictures/Screenshots"
-export ZSH_PLUGINS_DIR="$XDG_DATA_HOME/zsh/plugins"
 export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export CABAL_CONFIG="$XDG_CONFIG_HOME/cabal/config"
 export CABAL_DIR="$XDG_DATA_HOME/cabal"
-export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export W3M_DIR="$XDG_DATA_HOME/w3m"
-export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
+export CALCHISTFILE="$XDG_CACHE_HOME/calchist"
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export DOTREMINDERS="$XDG_DATA_HOME/remind/reminders"
+export GNUPGHOME="$HOME/.gnupg"
 export GOPATH="$XDG_DATA_HOME"/go
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+export HISTFILE="$XDG_DATA_HOME/history"
+export HISTSIZE=10000000
+export HYPRSHOT_DIR="$HOME/Pictures/Screenshots"
+export LEDGER="$XDG_DATA_HOME/ledger"
+export LEDGER_FILE="$LEDGER/master.ledger"
+export LESSHISTFILE="-"
+export MAILSYNC_MUTE="mute"
+export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/config"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export PARALLEL_HOME="$XDG_CONFIG_HOME/parallel"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
+export SAVEHIST=10000000
+export SSH_AGENT_PID=""
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+export STACK_ROOT="$XDG_DATA_HOME"/stack
+export SWORD_PATH="$XDG_DATA_HOME/sword"
+export TASKDATA="$XDG_DATA_HOME/task"
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
-export STACK_ROOT="$XDG_DATA_HOME"/stack
+export W3M_DIR="$XDG_DATA_HOME/w3m"
+export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
+export ZSH_PLUGINS_DIR="$XDG_DATA_HOME/zsh/plugins"
