@@ -3,5 +3,6 @@
 .config/msmtp
 .config/notmuch
 .config/mbsync
+.local/bin/backtask
 {{ end }}
 README.md

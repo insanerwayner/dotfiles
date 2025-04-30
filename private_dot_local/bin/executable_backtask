@@ -1,0 +1,6 @@
+#!/bin/bash
+# export tasks
+# Remove taskwarrior & jrnl backups older than 4 days
+task export > "$TASKDATA/task-export-$(date +'%Y%m%d').json" && 
+    find $TASKDATA/*.json -maxdepth 1 -type f -mtime +4 -exec rm {} \;
+
