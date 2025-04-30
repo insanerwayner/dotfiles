@@ -3,6 +3,7 @@
 .config/msmtp
 .config/notmuch
 .config/mbsync
+.config/systemd/user/taskback.*
 .local/bin/backtask
 {{ end }}
 README.md

@@ -1,0 +1,8 @@
+[Unit]
+Description=Export Tasks to json
+
+[Service]
+ExecStart=/home/wayne/.local/bin/backtask
+
+[Install]
+WantedBy=default.target
