@@ -1,0 +1,80 @@
+# Rule precedence to specify the order of color application
+rule.precedence.color=deleted,completed,active,keyword.,tag.WAITING,tag.,project.,due.today,overdue,scheduled,due,blocked,blocking,recurring,tagged,uda.
+
+# General alternating color for all tasks in lists
+color.alternate=rgb555 on gray2  # Black text on Gray background for alternating lines
+
+# Overdue task (black text on Orange Red background)
+color.overdue=rgb000 on rgb510   # Black text on Orange Red background
+
+# Due today
+color.due.today=rgb000 on rgb550       # Black text on Bright Yellow background
+
+# Due (general)
+color.due=rgb000 on rgb540             # Black text on Gold background
+
+# Active tasks (olive green for softer contrast)
+color.active=rgb000 on rgb430           # Black text on Olive Green background
+
+# Waiting tasks (muted blue for contrast with warm tones)
+color.tag.WAITING=rgb344         # Muted Blue text
+
+# Completed tasks (lighter gray for better blending)
+color.completed=rgb000 on rgb333       # Black text on Light Gray background
+
+# Deleted tasks (muted reddish-gray for distinctiveness)
+color.deleted=rgb444 on rgb522        # Gray text on Soft Reddish Gray background
+
+# Priority levels
+color.priority.H=bold rgb555 on rgb510  # Bold white text on Orange Red for High priority
+color.priority.M=rgb000 on rgb540        # Black text on Gold for Medium priority
+color.priority.L=rgb000 on rgb543        # Black text on Muted Yellow for Low priority
+
+# Task labels
+color.label=rgb555          # White text for labels
+
+# Headers
+color.header=rgb555          # White text for headers
+
+# Debug information
+color.debug=rgb555 on rgb333          # White text on Light Gray for debug
+
+# Error messages
+color.error=rgb555 on rgb500          # White text on Red for error messages
+
+# Warnings
+color.warning=rgb555 on rgb510        # White text on Orange Red for warnings
+
+# Urgency (highest priority tasks)
+color.urgency=rgb555 on rgb500        # White text on Red for urgent tasks
+
+# -------------------------------------------------------------------
+# Report: Calendar
+# -------------------------------------------------------------------
+color.calendar.due=rgb000 on rgb510           # Black text on Orange Red for due tasks
+color.calendar.due.today=rgb000 on rgb550     # Black text on Bright Yellow for tasks due today
+color.calendar.holiday=rgb555 on rgb200       # White text on light red for holidays
+color.calendar.overdue=rgb555 on rgb500       # White text on red for overdue tasks
+color.calendar.today=underline rgb000 on rgb230  # Underlined black text on muted yellow for today
+color.calendar.weekend=rgb000 on gray3        # Black text on muted gray for weekends
+color.calendar.weeknumber=rgb444              # Gray text for week numbers
+
+# -------------------------------------------------------------------
+# Report: Burndown
+# -------------------------------------------------------------------
+color.burndown.pending=rgb000 on gray5        # Black text on muted gray for pending tasks
+color.burndown.started=rgb000 on rgb430       # Black text on Olive Green for started tasks
+color.burndown.done=rgb555 on rgb102          # White text on muted green for completed tasks
+
+# -------------------------------------------------------------------
+# Report: History
+# -------------------------------------------------------------------
+color.history.add=rgb000 on rgb540            # Black text on gold for task addition in history
+color.history.delete=rgb444 on rgb522         # Gray text on Soft Reddish Gray for task deletion in history
+color.history.done=rgb000 on rgb430           # Black text on Olive Green for completed tasks in history
+
+# -------------------------------------------------------------------
+# Report: Summary
+# -------------------------------------------------------------------
+color.summary.bar=rgb555 on rgb430            # White text on Olive Green for summary bar
+color.summary.background=rgb000 on gray2      # Black text on gray for summary background
