@@ -27,6 +27,7 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export DOTREMINDERS="$XDG_DATA_HOME/remind/reminders"
 export GNUPGHOME="$HOME/.gnupg"
 export GOPATH="$XDG_DATA_HOME"/go
+export GPG_TTY=$(tty)
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export HISTFILE="$XDG_DATA_HOME/history"
 export HISTSIZE=10000000
