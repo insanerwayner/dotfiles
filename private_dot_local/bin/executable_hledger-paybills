@@ -10,7 +10,7 @@ function get_trans()
 
 function pay_credit()
     {
-    credit=$(hledger bal -C Liabilities:Credit --no-total -O csv -R | cut -d, -f 1,2 --output-delimiter='  ' | tail -n +2 | tr -d \"-)
+    credit=$(hledger bal -C Liabilities:Credit not:tag:paymentplan --no-total -O csv -R | cut -d, -f 1,2 --output-delimiter='  ' | tail -n +2 | tr -d \"-)
     while IFS= read -r owed
     do
         desc=$(echo "$owed" | cut -d: -f 3 | cut -d\  -f 1)
