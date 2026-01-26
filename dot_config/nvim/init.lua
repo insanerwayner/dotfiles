@@ -112,16 +112,17 @@ require("lazy").setup({
 require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = { 'bashls', 'pyright', 'yamlls', 'jsonls', 'dockerls' },
+  handlers = {
+    function(server_name)
+      lspconfig[server_name].setup({})
+    end,
+  },
 })
+
 
 local lspconfig = require('lspconfig')
 
--- Automatically set up servers installed via Mason
-require('mason-lspconfig').setup_handlers({
-  function(server_name)
-    lspconfig[server_name].setup({})
-  end,
-})
+
 
 -- Autocompletion configuration
 local cmp = require('cmp')
