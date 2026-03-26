@@ -19,3 +19,8 @@
     url = "https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
     stripComponents = 2
     include = ["fonts/ttf/*"]
+[".config/alacritty/themes"]
+    type = "git-repo"
+    url = "https://github.com/alacritty/alacritty-theme.git"
+    include = ["themes/*"]
+    refreshPeriod = "168h"
