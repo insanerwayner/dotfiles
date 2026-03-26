@@ -139,32 +139,34 @@ misc {
 workspace = r[1-5], monitor:HDMI-A-1
 workspace = r[6-0], monitor:DP-1
 {{- end }}
-windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
-windowrulev2 = pin, title:^(Picture-in-Picture|Firefox)$
-windowrulev2 = pseudo, title:^(Picture-in-Picture|Firefox)$
-windowrulev2 = float, title:^(Picture-in-Picture|Firefox)$
-windowrulev2 = size 480 270, title:^(Picture-in-Picture|Firefox)$
-windowrulev2 = move 1440 810, title:^(Picture-in-Picture|Firefox)$
+layerrule = animation slide bottom, match:namespace rofi
+layerrule = dim_around on, match:namespace rofi
+layerrule = blur on, match:namespace rofi
+layerrule = order -1, match:namespace rofi
 
-windowrulev2 = float, title:^(Variety Preferences)$
-windowrulev2 = center, title:^(Variety Preferences)$
-windowrulev2 = float, title:^(Variety Images|Variety Recent Downloads)$
-windowrulev2 = pin, title:^(Variety Images|Variety Recent Downloads)$
-windowrulev2 = move w -60, title:^(Variety Images|Variety Recent Downloads)$
-windowrulev2 = size 1980 300, title:^(Variety Images|Variety Recent Downloads)$
-windowrulev2 = float, title:^(Nextcloud)$
-windowrulev2 = size 1000 800, title:^(nmtui-term)$
-windowrulev2 = stayfocused, title:^(nmtui-term)$
-windowrulev2 = float, title:^(nmtui-term)$
-windowrulev2 = size 900 700, title:^(nmtui-term)$
+# ---- Window rules (new syntax; replaces windowrulev2) ----
 
-layerrule = animation slide bottom, rofi
-layerrule = dimaround, rofi
-layerrule = blur, rofi
-layerrule = order -1, rofi
+# Stop “maximize” surprises (new name is suppress_event)
+windowrule = match:class .*, suppress_event maximize
 
-#caffiene mode
-windowrulev2 = idleinhibit, fullscreen, class:firefox
+# Picture-in-Picture / Firefox titled windows
+windowrule = match:title ^(Picture-in-Picture|Firefox)$, pin 1, pseudo 1, float 1, size 480 270, move 1440 810
+
+# Variety
+windowrule = match:title ^(Variety Preferences)$, float 1, center 1
+
+windowrule = match:title ^(Variety Images|Variety Recent Downloads)$, float 1, pin 1, size 1980 300, move (monitor_w-60) -60
+
+# Nextcloud
+windowrule = match:title ^(Nextcloud)$, float 1
+
+# nmtui-term (note: you had two different size rules; last one wins, so I kept 900x700)
+windowrule = match:title ^(nmtui-term)$, float 1, size 900 700, stay_focused 1
+
+# “Caffeine mode” for fullscreen Firefox:
+# inhibit idle only when Firefox is fullscreen (hypridle won't trigger)
+windowrule = match:class ^(firefox)$, idle_inhibit fullscreen
+
 $mainMod = SUPER
 
 bind = $mainMod, Return, exec, $terminal
