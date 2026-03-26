@@ -90,6 +90,11 @@ cdiff()
 lgrep()
     {
     arg='BEGIN { IGNORECASE=1; ORS=''"\n\n"'" } /$1/"
-    hledger print | awk -v RS='' "$arg" | bat --paging=never --style=plain -l ledger
+    if [ -z "$2" ]
+    then
+        hledger print | awk -v RS='' "$arg" | bat --paging=never --style=plain -l ledger
+    else
+        hledger -f "${LEDGER}/archive/${2}.ledger" print | awk -v RS='' "$arg" | bat --paging=never --style=plain -l ledger
+    fi
     }
 
