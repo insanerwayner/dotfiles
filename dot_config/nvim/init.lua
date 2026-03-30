@@ -109,6 +109,8 @@ require("lazy").setup({
 
 
 -- Mason and LSP configurations
+local lspconfig = require('lspconfig')
+
 require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = { 'bashls', 'pyright', 'yamlls', 'jsonls', 'dockerls' },
@@ -120,7 +122,6 @@ require('mason-lspconfig').setup({
 })
 
 
-local lspconfig = require('lspconfig')
 
 
 
