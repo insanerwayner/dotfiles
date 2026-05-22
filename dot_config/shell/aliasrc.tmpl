@@ -1,5 +1,6 @@
 # Command Aliases
 alias vim='nvim'
+alias e='vim'
 alias vimdiff='nvim -d'
 alias cls=clear
 alias wttr='curl wttr.in/75090\?u'
@@ -57,3 +58,4 @@ alias qcal='calcurse -Q --filter-type=cal -d 7'
 # Connect to Work VPN
 alias work='sudo openfortivpn connect.lifepathsystems.org -u wreeves -p "$(pass ccmhmr.local | head -n1 )" --otp="$(pass otp ccmhmr.local)" --otp-delay=15'
 alias mayne='mosh --ssh="ssh -p 2233" wayne@darthwayne.duckdns.org'
+alias opened='journalctl --since today | grep "resume devices took" | cut -d\  -f 1,2,3 | xargs -I {} date --date={} +%r'
